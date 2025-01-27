@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Venta de Medicamentos{% endblock %}
+
+{% block content %}
+    <h2>Venta de Medicamentos</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="cliente">Cliente:</label>
+        <select name="cliente" id="cliente">
+            {% for cliente in clientes %}
+                <option value="{{ cliente.id }}">{{ cliente.usuario.username }}</option>
+            {% endfor %}
+        </select>
+        <label for="medicamento">Medicamento:</label>
+        <select name="medicamento" id="medicamento">
+            {% for medicamento in medicamentos %}
+                <option value="{{ medicamento.id }}">{{ medicamento.nombre }}</option>
+            {% endfor %}
+        </select>
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" name="cantidad" id="cantidad" required>
+        <button type="submit">Registrar Venta</button>
+    </form>
+{% endblock %}
