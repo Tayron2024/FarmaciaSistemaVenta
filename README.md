@@ -14,3 +14,6 @@ Autenticación de Usuarios: Roles para administrador, empleado de sucursal y cli
 
 ## Presentación:
 La presentación se realizara el link del repositorio, el cual deberá  estar bajo el flujo Gitflow, adicionalmente en el readme presentar el diagrama de clases y capturas de la interfaz
+## Diagrama clases
+
+![image](https://github.com/user-attachments/assets/3a613839-bd85-4c5e-b2bd-9629cd2f1a04)
