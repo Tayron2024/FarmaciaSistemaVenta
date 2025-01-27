@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Gestión de Inventario</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Sucursal</th>
+            <th>Medicamento</th>
+            <th>Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for inventario in inventarios %}
+        <tr>
+            <td>{{ inventario.sucursal.nombre }}</td>
+            <td>{{ inventario.medicamento.nombre }}</td>
+            <td>{{ inventario.cantidad }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

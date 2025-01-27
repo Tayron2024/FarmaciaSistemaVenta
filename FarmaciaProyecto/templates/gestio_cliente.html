@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Gestión de Clientes</h1>
+<ul>
+    {% for cliente in clientes %}
+        <li>{{ cliente.usuario.username }} - {{ cliente.direccion }} - {{ cliente.telefono }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

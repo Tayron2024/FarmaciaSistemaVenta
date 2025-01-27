@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Venta de Medicamentos</h1>
+<ul>
+    {% for medicamento in medicamentos %}
+        <li>{{ medicamento.nombre }} - ${{ medicamento.precio }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
