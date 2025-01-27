@@ -19,3 +19,12 @@ Usuarios y Roles: Roles diferenciados para administración, empleados de sucursa
 ## Diagrama clases
 
 ![image](https://github.com/user-attachments/assets/3a613839-bd85-4c5e-b2bd-9629cd2f1a04)
+
+## Fotos de las templates
+
+![image](https://github.com/user-attachments/assets/23849979-f832-4393-b206-1f4001378a73)
+
+![image](https://github.com/user-attachments/assets/7bd15445-7f68-48df-99db-ec52d4110cf1)
+
+![image](https://github.com/user-attachments/assets/7e199f4a-01ae-46c0-ad27-9b8e663029a2)
+
