@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sucursales y Productos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #6c757d;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header img {
+            height: 50px;
+        }
+        header h1 {
+            margin: 0;
+        }
+        main {
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+        .sucursal {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .sucursal h2 {
+            margin: 0 0 10px;
+        }
+        .productos {
+            list-style: none;
+            padding: 0;
+        }
+        .productos li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .productos li:last-child {
+            border-bottom: none;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #6c757d;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3R4zPg3C1eM0MG_u7iG1b8t-2xQTXYNEp-w&s" alt="Logo de la farmacia">
+        <h1>Sucursales y Productos</h1>
+        <nav>
+            <a href="/farmaceutico/">Regresar</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Acceso a Sucursales</h2>
+        <div class="sucursal">
+            <h2>Sucursal Avenida los Paltas</h2>
+            <ul class="productos">
+                <li>Paracetamol - 50 unidades en stock</li>
+                <li>Loratadina - 60 unidades en stock</li>
+                <li>Alcohol - 25 unidades en stock</li>
+            </ul>
+        </div>
+        <div class="sucursal">
+            <h2>Sucursal La Argelia</h2>
+            <ul class="productos">
+                <li>Ibuprofeno - 100 unidades en stock</li>
+                <li>Loratadina - 20 unidades en stock</li>
+                <li>Aspirinas - 30 unidades en stock</li>
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Pharmacy Management System. All rights reserved.</p>
+    </footer>
+</body>
+</html>
