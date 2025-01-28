@@ -125,7 +125,7 @@ El cliente recibe su pedido en la sucursal elegida o lo retira según la opción
 
 ![image](https://github.com/user-attachments/assets/159ea763-aafb-4406-bb18-6ef4c2ee7a6e)
 
-
+![image](https://github.com/user-attachments/assets/c29fec9e-a5d5-4d65-af90-e0529de02fd6)
 
 ## GitFlow
 
