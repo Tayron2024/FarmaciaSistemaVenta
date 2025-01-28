@@ -22,9 +22,20 @@ Usuarios y Roles: Roles diferenciados para administración, empleados de sucursa
 
 ## Fotos de las templates
 
-![image](https://github.com/user-attachments/assets/23849979-f832-4393-b206-1f4001378a73)
+![image](https://github.com/user-attachments/assets/fab5ee3c-f995-48b2-9b98-a6869d30189f)
 
-![image](https://github.com/user-attachments/assets/7bd15445-7f68-48df-99db-ec52d4110cf1)
+![image](https://github.com/user-attachments/assets/3cfae426-c538-4722-96ff-4ea52ee5f9ea)
 
-![image](https://github.com/user-attachments/assets/7e199f4a-01ae-46c0-ad27-9b8e663029a2)
+![image](https://github.com/user-attachments/assets/d64005dd-6bbc-4cb5-82f2-bf89ae4017f9)
+
+![image](https://github.com/user-attachments/assets/b4f5eca1-17ac-4b85-b183-aa2a631738c9)
+
+![image](https://github.com/user-attachments/assets/159ea763-aafb-4406-bb18-6ef4c2ee7a6e)
+
+![image](https://github.com/user-attachments/assets/4c1d046a-1d2b-4af6-9630-a2b1463c9a50)
+
+![image](https://github.com/user-attachments/assets/5528316e-9115-4a87-a15d-c2937fff5105)
+
+
+
 
