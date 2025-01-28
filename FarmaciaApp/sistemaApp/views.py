@@ -20,3 +20,5 @@ def sucursal(request):
     return render(request, "gestion_sucursal.html")
 def compra(request):
     return render(request, "gestion_compra.html")
+def confirmacion_pago(request):
+    return render(request, 'compra/confirmacion_pago.html')

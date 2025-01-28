@@ -15,4 +15,6 @@ urlpatterns = [
     path('gestion_compra/',views.compra),
     path('cliente/', views.cliente, name='cliente'),
     path('compra/', views.compra, name='compra'),
+    path('compra/confirmacion_pago/', views.confirmacion_pago, name='confirmacion_pago'),
+
 ]

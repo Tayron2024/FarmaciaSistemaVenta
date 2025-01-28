@@ -13,7 +13,7 @@
         }
 
         header {
-            background-color: #28a745; /* Verde */
+            background-color: #28a745;
             color: #fff;
             padding: 20px 40px;
             display: flex;
@@ -42,17 +42,13 @@
 
         .container {
             padding: 30px;
-        }
-
-        .welcome-section {
             text-align: center;
-            margin-bottom: 30px;
         }
 
         .welcome-section h2 {
             color: #333;
             font-size: 24px;
-            margin: 10px 0;
+            margin-bottom: 10px;
         }
 
         .welcome-section p {
@@ -60,42 +56,14 @@
             font-size: 16px;
         }
 
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        .button-container {
+            display: flex;
+            justify-content: center;
             gap: 20px;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
-        .card {
-            background: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            padding: 25px;
-            text-align: center;
-            border: 1px solid #ddd;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .card h2 {
-            font-size: 20px;
-            color: #28a745;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        .card button {
+        .button-container button {
             background-color: #28a745;
             color: white;
             border: none;
@@ -103,12 +71,11 @@
             padding: 15px 25px;
             cursor: pointer;
             font-size: 16px;
-            width: 100%;
             transition: background-color 0.3s;
         }
 
-        .card button:hover {
-            background-color: #218838; /* Verde más oscuro */
+        .button-container button:hover {
+            background-color: #218838;
         }
 
         footer {
@@ -122,14 +89,8 @@
         }
 
         @media (max-width: 768px) {
-            .dashboard {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .dashboard {
-                grid-template-columns: 1fr;
+            .button-container {
+                flex-wrap: wrap;
             }
         }
     </style>
@@ -148,30 +109,11 @@
             <p>Administra todas las tareas diarias de forma eficiente.</p>
         </div>
 
-        <div class="dashboard">
-            <div class="card">
-                <h2>Inventario</h2>
-                <p>Consulta y actualiza niveles de almacenamiento de medicamentos.</p>
-                <button onclick="window.location.href='/inventario/'">Ver Inventario</button>
-            </div>
-
-            <div class="card">
-                <h2>Pedidos</h2>
-                <p>Gestiona pedidos y reabastece productos necesarios.</p>
-                <button onclick="window.location.href='/pedido/'">Ver Pedidos</button>
-            </div>
-
-            <div class="card">
-                <h2>Sucursales</h2>
-                <p>Accede a la información de diversas sucursales.</p>
-                <button onclick="window.location.href='/sucursal/'">Ver Sucursales</button>
-            </div>
-
-            <div class="card">
-                <h2>Reportes</h2>
-                <p>Genera informes detallados sobre ventas y almacenamiento.</p>
-                <button onclick="window.location.href='/reporte/'">Generar Reportes</button>
-            </div>
+        <div class="button-container">
+            <button onclick="window.location.href='/inventario/'">Inventario</button>
+            <button onclick="window.location.href='/pedido/'">Pedidos</button>
+            <button onclick="window.location.href='/sucursal/'">Sucursales</button>
+            <button onclick="window.location.href='/reporte/'">Reportes</button>
         </div>
     </div>
 
