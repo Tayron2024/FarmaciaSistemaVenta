@@ -1,6 +1,8 @@
 # Sistema de Gestión para Cadena de Farmacias
 Este sistema está diseñado para gestionar el inventario, ventas, transferencias entre sucursales y el seguimiento de pedidos de una cadena de farmacias con múltiples sucursales. Permite la compra de medicamentos, con la opción de retirarlos en la sucursal de origen o recibirlos en la sucursal de compra, incluso si el medicamento no está disponible localmente.
 
+## Nombre : Tayron Morales mtayronfernando@gmail.com
+
 ## Objetivos del Sistema
 Gestión de Inventarios: Controla el stock de medicamentos en cada sucursal.
 Venta de Medicamentos: Permite la venta de productos disponibles en la sucursal.
@@ -36,6 +38,9 @@ Usuarios y Roles: Roles diferenciados para administración, empleados de sucursa
 
 ![image](https://github.com/user-attachments/assets/5528316e-9115-4a87-a15d-c2937fff5105)
 
+## GitFlow
+
+![image](https://github.com/user-attachments/assets/bb0c31c5-786f-4d31-982f-ada4f4b7df14)
 
 
 
