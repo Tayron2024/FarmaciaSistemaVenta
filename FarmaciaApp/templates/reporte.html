@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #28a745; /* Color verde */
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h1 {
+            margin: 0;
+        }
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .reporte {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .reporte:hover {
+            transform: scale(1.02);
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #28a745; /* Color verde */
+            color: white;
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-group button {
+            background-color: #28a745; /* Verde */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-group button:hover {
+            background-color: #218838;
+        }
+
+        .reporte-list {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Reportes</h1>
+        <nav>
+            <a href="/farmaceutico/" style="color: white; text-decoration: none;">Regresar</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Lista de Reportes</h2>
+
+        <form id="reporteForm">
+            <div class="form-group">
+                <label for="reporteName">Nombre del Reporte</label>
+                <input type="text" id="reporteName" name="reporteName" required>
+            </div>
+            <div class="form-group">
+                <label for="reporteDetails">Detalles del Reporte</label>
+                <textarea id="reporteDetails" name="reporteDetails" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit">Añadir Reporte</button>
+            </div>
+        </form>
+
+        <div class="reporte-list">
+            <!-- Aquí se agregan los reportes -->
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Pharmacy Management System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('reporteForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const reporteName = document.getElementById('reporteName').value;
+            const reporteDetails = document.getElementById('reporteDetails').value;
+
+            if (reporteName && reporteDetails) {
+                const reporteList = document.querySelector('.reporte-list');
+                const nuevoReporte = document.createElement('div');
+                nuevoReporte.classList.add('reporte');
+                nuevoReporte.innerHTML = `
+                    <h3>${reporteName}</h3>
+                    <p>${reporteDetails}</p>
+                `;
+                reporteList.appendChild(nuevoReporte);
+
+                // Limpiar el formulario
+                document.getElementById('reporteForm').reset();
+            }
+        });
+    </script>
+</body>
+</html>

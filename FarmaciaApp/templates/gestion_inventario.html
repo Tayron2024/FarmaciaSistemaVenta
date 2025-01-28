@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #de6749;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        header .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #de6749;
+            color: white;
+        }
+
+        .add-button {
+            background-color: #de6749;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-button:hover {
+            background-color: #de6749;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #de6749;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3R4zPg3C1eM0MG_u7iG1b8t-2xQTXYNEp-w&s" alt="Logo"> <!-- Replace with the logo image -->
+            <h1>Gestión de inventario</h1>
+        </div>
+        <nav>
+            <a href="/farmaceutico/">Regresar</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Inventario</h2>
+        <button class="add-button">Añadir nuevo ítem</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ibuprofeno</td>
+                    <td>100</td>
+                    <td>$2.50</td>
+                    <td><button>Edit</button> <button>Delete</button></td>
+                </tr>
+                <tr>
+                    <td>Loratadina</td>
+                    <td>50</td>
+                    <td>$2.50</td>
+                    <td><button>Edit</button> <button>Delete</button></td>
+                </tr>
+                <tr>
+                    <td>Loratadina</td>
+                    <td>60</td>
+                    <td>$2.50</td>
+                    <td><button>Edit</button> <button>Delete</button></td>
+                </tr>
+                <tr>
+                    <td>Alcohol</td>
+                    <td>60</td>
+                    <td>$3.00</td>
+                    <td><button>Edit</button> <button>Delete</button></td>
+                </tr>
+                <tr>
+                    <td>Aspirina</td>
+                    <td>30</td>
+                    <td>$3.00</td>
+                    <td><button>Edit</button> <button>Delete</button></td>
+                </tr>
+                <tr>
+                    <td>Complejo B</td>
+                    <td>60</td>
+                    <td>$3.00</td>
+                    <td><button>Edit</button> <button>Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Pharmacy Management System. All rights reserved.</p>
+    </footer>
+</body>
+</html>
