@@ -117,9 +117,9 @@ El cliente recibe su pedido en la sucursal elegida o lo retira según la opción
 
 ![image](https://github.com/user-attachments/assets/fab5ee3c-f995-48b2-9b98-a6869d30189f)
 
-![image](https://github.com/user-attachments/assets/3cfae426-c538-4722-96ff-4ea52ee5f9ea)
+![image](https://github.com/user-attachments/assets/a7591769-8630-4841-a01a-b1914d4a578d)
 
-![image](https://github.com/user-attachments/assets/d64005dd-6bbc-4cb5-82f2-bf89ae4017f9)
+![image](https://github.com/user-attachments/assets/e3bddee5-12e0-4f17-a344-4729b0a78d7d)
 
 ![image](https://github.com/user-attachments/assets/b4f5eca1-17ac-4b85-b183-aa2a631738c9)
 
