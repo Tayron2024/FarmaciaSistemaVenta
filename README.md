@@ -1,23 +1,112 @@
 # Sistema de Gestión para Cadena de Farmacias
-Este sistema está diseñado para gestionar el inventario, ventas, transferencias entre sucursales y el seguimiento de pedidos de una cadena de farmacias con múltiples sucursales. Permite la compra de medicamentos, con la opción de retirarlos en la sucursal de origen o recibirlos en la sucursal de compra, incluso si el medicamento no está disponible localmente.
 
-## Nombre : Tayron Morales mtayronfernando@gmail.com
+Este sistema está diseñado para gestionar el inventario, las ventas, las transferencias entre sucursales y el seguimiento de pedidos en una cadena de farmacias con múltiples sucursales. Además, permite a los clientes adquirir medicamentos con opciones flexibles de entrega, como retiro en la sucursal de origen o envío a la sucursal de compra, incluso si los medicamentos no están disponibles localmente.
+
+## Información de el Estudiante
+
+Nombre: Tayron Morales Correo Electrónico: mtayronfernando@gmail.com
 
 ## Objetivos del Sistema
-Gestión de Inventarios: Controla el stock de medicamentos en cada sucursal.
-Venta de Medicamentos: Permite la venta de productos disponibles en la sucursal.
-Transferencias entre Sucursales: Compra de medicamentos desde otra sucursal si no están disponibles localmente.
-Opciones de Entrega: Los clientes pueden elegir retirar el medicamento en la sucursal de origen o recibirlo en la sucursal donde realizaron la compra.
-Registro de Clientes y Pedidos: Gestión de clientes, pedidos y seguimiento de entrega.
-Autenticación de Usuarios: Roles para administrador, empleado de sucursal y cliente.
+
+**Gestión de Inventarios**: Controlar y monitorear el stock de medicamentos en cada sucursal.
+
+**Venta de Medicamentos**: Permitir la venta de productos disponibles en las sucursales.
+
+**Transferencias entre Sucursales**: Facilitar la compra de medicamentos desde otras sucursales si no están disponibles en la sucursal local.
+
+## Opciones de Entrega: Ofrecer a los clientes la posibilidad de:
+
+-Retirar el medicamento en la sucursal de origen.
+
+-Recibir el medicamento en la sucursal donde realizaron la compra.
+
+-Registro de Clientes y Pedidos: Gestionar información sobre clientes, pedidos y su seguimiento.
+
+-Autenticación de Usuarios: Implementar roles diferenciados para administrador, empleados de sucursal y clientes.
 
 ## Características Principales
-Gestión de Medicamentos y Stock: Administración eficiente del inventario por sucursal.
-Pedidos: Creación y seguimiento de pedidos de medicamentos.
-Transferencias de Sucursales: Habilidad para realizar compras de medicamentos desde sucursales con disponibilidad.
-Sistema de Entregas: Flexibilidad en la opción de entrega, ya sea en la sucursal de origen o en la sucursal de compra.
-Usuarios y Roles: Roles diferenciados para administración, empleados de sucursales y clientes.
 
+1. Gestión de Medicamentos y Stock
+
+Control detallado del inventario de medicamentos por sucursal.
+
+Visualización de niveles de stock en tiempo real.
+
+Alertas automáticas para reabastecimiento de medicamentos con bajo stock.
+
+2. Pedidos
+
+Creación de pedidos en el sistema para clientes registrados.
+
+Seguimiento del estado del pedido (en proceso, enviado, completado).
+
+Historial de compras accesible para los clientes y empleados.
+
+3. Transferencias entre Sucursales
+
+Validación automática de disponibilidad de medicamentos en otras sucursales.
+
+Proceso ágil de transferencias para garantizar la entrega oportuna de los productos.
+
+Registro de transferencias entre sucursales para auditoría.
+
+4. Sistema de Entregas
+
+Flexibilidad en las opciones de entrega para los clientes:
+
+Retiro directo en la sucursal de origen.
+
+Recepción en la sucursal donde se realizó la compra.
+
+Optimización del tiempo de entrega mediante la gestión eficiente de transferencias internas.
+
+5. Usuarios y Roles
+
+Administrador:
+
+Administración general del sistema.
+
+Creación y gestión de sucursales, empleados y productos.
+
+Empleado de Sucursal:
+
+Gestión del inventario local.
+
+Procesamiento de ventas y pedidos.
+
+Cliente:
+
+Exploración de productos y consulta de disponibilidad.
+
+Creación de pedidos con opciones personalizadas de entrega.
+
+## Flujo del Sistema
+
+Inicio de Sesión:
+
+Los usuarios inician sesión en el sistema de acuerdo con su rol.
+
+Exploración y Selección de Medicamentos:
+
+Los clientes exploran el catálogo de medicamentos con descripciones, precios y disponibilidad en tiempo real.
+
+Creación de Pedidos:
+
+Los clientes seleccionan productos y eligen las cantidades deseadas.
+
+Definen la opción de entrega: retiro o envío.
+
+Procesamiento de Pedidos:
+
+El sistema verifica la disponibilidad del stock y realiza transferencias si es necesario.
+
+Actualización del Inventario:
+
+El stock se ajusta automáticamente después de cada venta o transferencia.
+
+Entrega del Pedido:
+
+El cliente recibe su pedido en la sucursal elegida o lo retira según la opción seleccionada.
 ## Diagrama clases
 
 ![image](https://github.com/user-attachments/assets/3a613839-bd85-4c5e-b2bd-9629cd2f1a04)
