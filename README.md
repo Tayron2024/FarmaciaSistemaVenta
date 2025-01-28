@@ -4,7 +4,8 @@ Este sistema está diseñado para gestionar el inventario, las ventas, las trans
 
 ## Información de el Estudiante
 
-Nombre: Tayron Morales Correo Electrónico: mtayronfernando@gmail.com
+Nombre: Tayron Morales 
+Correo Electrónico: mtayronfernando@gmail.com
 
 ## Objetivos del Sistema
 
