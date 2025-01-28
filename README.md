@@ -111,7 +111,7 @@ Entrega del Pedido:
 El cliente recibe su pedido en la sucursal elegida o lo retira según la opción seleccionada.
 ## Diagrama clases
 
-![image](https://github.com/user-attachments/assets/3a613839-bd85-4c5e-b2bd-9629cd2f1a04)
+![image](https://github.com/user-attachments/assets/cb213eab-263b-4d22-bcf7-494043dafc63)
 
 ## Fotos de las templates
 
