@@ -115,30 +115,24 @@ El cliente recibe su pedido en la sucursal elegida o lo retira según la opción
 
 ## Fotos de las templates
 
-![image](https://github.com/user-attachments/assets/72c6816e-fb78-42ab-b88f-259acf189b20)
+![image](https://github.com/user-attachments/assets/1a840577-41c2-4081-b1ca-a6b37c961191)
 
+![image](https://github.com/user-attachments/assets/f638bff6-2a60-4922-b19d-f1cf990d3c1c)
 
-## GitFlow
+![image](https://github.com/user-attachments/assets/8ba0fe54-4db2-4783-969e-d1e4ee5456e2)
 
-![image](https://github.com/user-attachments/assets/bb0c31c5-786f-4d31-982f-ada4f4b7df14)
+![image](https://github.com/user-attachments/assets/359be36b-4dbe-48c7-ac13-b45c24069d30)
 
-![image](https://github.com/user-attachments/assets/6c232b64-2d38-4aa8-832a-a215b64b3344)
+![image](https://github.com/user-attachments/assets/213f0e8c-8a17-43c2-97f2-5b72c62b136c)
 
-![image](https://github.com/user-attachments/assets/e420c63f-f717-41e8-a507-45f404b1bf2c)
+![image](https://github.com/user-attachments/assets/b469629f-e91a-483d-990e-715fc7b7a529)
 
-![image](https://github.com/user-attachments/assets/7a29ad22-c53e-4741-9d09-76188ebb58a4)
+![image](https://github.com/user-attachments/assets/9aa81845-6dca-4740-811b-2b2d763360d5)
 
-![image](https://github.com/user-attachments/assets/88720626-f143-4b6d-ab52-f5ac7c52c33a)
+![image](https://github.com/user-attachments/assets/f8d16a78-3e5a-44bd-a59c-41daefaa3181)
 
-![image](https://github.com/user-attachments/assets/32882e82-62a2-4d3e-91b8-23b1843b118b)
+![image](https://github.com/user-attachments/assets/37a25b5f-01e3-4122-a6b3-92b236e8c7fa)
 
-![image](https://github.com/user-attachments/assets/11818782-2c3f-40ac-9614-2b1b810e04aa)
-
-![image](https://github.com/user-attachments/assets/f98977fa-9dd0-47c1-a91c-cc7884b6d5a0)
-
-![image](https://github.com/user-attachments/assets/4363d9ad-ef5b-468d-955c-c910c2cbbf68)
-
-![image](https://github.com/user-attachments/assets/e9e5c0db-262b-47e0-bddd-4c175c6146e9)
 
 
 
