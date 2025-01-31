@@ -1,3 +1,6 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,73 +8,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farmacias SanaSana - Login</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #28a745, #218838);
-        }
-
         .login-container {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            max-width: 400px;
             width: 100%;
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-
         .login-container h2 {
-            margin-bottom: 20px;
-            color: #333;
             font-size: 24px;
+            margin-bottom: 20px;
         }
-
         .form-group {
             margin-bottom: 15px;
             text-align: left;
         }
-
         .form-group label {
-            display: block;
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 5px;
+            font-size: 16px;
+            font-weight: bold;
         }
-
         .form-group input, .form-group select {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             font-size: 16px;
             border: 1px solid #ccc;
-            border-radius: 8px;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
-
         .login-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
             background-color: #28a745;
             color: white;
             border: none;
-            padding: 12px;
-            font-size: 16px;
-            border-radius: 8px;
-            width: 100%;
+            border-radius: 5px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background-color 0.3s;
         }
-
         .login-btn:hover {
             background-color: #218838;
         }
-
         .error-message {
             color: red;
-            font-size: 14px;
             margin-top: 10px;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -91,7 +75,7 @@
                 <label for="role">Rol</label>
                 <select id="role" name="role" required>
                     <option value="">Selecciona un rol</option>
-                    <option value="admin">Administrador</option>
+                    <option value="Admin">Administrador</option>
                     <option value="pharmacist">Farmacéutico</option>
                     <option value="assistant">Cliente</option>
                 </select>
@@ -100,20 +84,16 @@
             <p class="error-message" id="errorMessage"></p>
         </form>
     </div>
-
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
-
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const role = document.getElementById('role').value;
             const errorMessage = document.getElementById('errorMessage');
-            
             errorMessage.textContent = '';
-
-            if (username === 'TayronAdmin' && password === '12345' && role === 'admin') {
-                window.location.href = '/admin';
+            if (username === 'TayronAdmin' && password === '12345' && role === 'Admin') {
+                window.location.href = '/Admin';
             } else if (username === 'tayron' && password === 'trabajador' && role === 'pharmacist') {
                 window.location.href = '/farmaceutico';
             } else if (username === 'douglas' && password === 'cliente' && role === 'assistant') {

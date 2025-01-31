@@ -1,133 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interfaz de Pago</title>
-    <style>
-        /* Estilo general */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #e0f7fa; /* Fondo celeste claro */
-            color: #333;
-        }
+    <title>Información de Pago</title>
 
-        /* Contenedor principal */
-        .payment-container {
-            max-width: 500px;
-            margin: 50px auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .payment-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #0078d4;
-        }
-
-        /* Estilo del formulario */
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin: 10px 0 5px;
-            font-weight: bold;
-        }
-
-        input, select {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            width: 100%;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #0078d4;
-        }
-
-        /* Botón de pago */
-        .pay-button {
-            background-color: #4caf50; /* Verde */
-            color: white;
-            padding: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            border: none;
-            border-radius: 30px; /* Bordes más redondeados */
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .pay-button:hover {
-            background-color: #45a049; /* Verde oscuro */
-            transform: translateY(-2px); /* Efecto de levantamiento */
-        }
-
-        .pay-button:active {
-            background-color: #3e8e41; /* Aún más oscuro al hacer clic */
-            transform: translateY(2px); /* Efecto de presionado */
-        }
-
-        /* Mensaje de total */
-        .total {
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-            color: #333;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-    </style>
+    <!-- Carga de archivo CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
+
 <body>
-    <div class="payment-container">
+
+    <!-- Contenedor principal de la sección de pago -->
+    <main class="container payment-container">
+        
+        <!-- Título de la sección -->
         <h2>Información de Pago</h2>
 
-        <!-- Mensaje del total -->
-        <div class="total" id="total-a-pagar">Total a pagar: $0.00</div>
+        <!-- Mensaje de total a pagar -->
+        <div class="total" id="total-a-pagar">
+            Total a pagar: $0.00
+        </div>
 
         <!-- Formulario de pago -->
         <form action="confirmacion_pago.html" method="POST">
+            
             <!-- Campo oculto para el total -->
             <input type="hidden" id="input-total" name="total" value="">
 
             <!-- Información personal -->
-            <label for="nombre">Nombre completo</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre completo" required>
+            <div class="form-group">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre completo" required>
+            </div>
 
-            <label for="correo">Correo electrónico</label>
-            <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo electrónico" required>
+            <div class="form-group">
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo electrónico" required>
+            </div>
 
             <!-- Dirección de envío -->
-            <label for="direccion">Dirección de envío</label>
-            <input type="text" id="direccion" name="direccion" placeholder="Ingresa tu dirección de envío" required>
+            <div class="form-group">
+                <label for="direccion">Dirección de envío</label>
+                <input type="text" id="direccion" name="direccion" placeholder="Ingresa tu dirección de envío" required>
+            </div>
 
             <!-- Información de la tarjeta -->
-            <label for="tarjeta">Número de tarjeta</label>
-            <input type="text" id="tarjeta" name="tarjeta" placeholder="1234 5678 9012 3456" required maxlength="19">
+            <div class="form-group">
+                <label for="tarjeta">Número de tarjeta</label>
+                <input type="text" id="tarjeta" name="tarjeta" placeholder="1234 5678 9012 3456" required maxlength="19">
+            </div>
 
-            <label for="expiracion">Fecha de expiración</label>
-            <input type="month" id="expiracion" name="expiracion" required>
+            <div class="form-group">
+                <label for="expiracion">Fecha de expiración</label>
+                <input type="month" id="expiracion" name="expiracion" required>
+            </div>
 
-            <label for="cvv">Código CVV</label>
-            <input type="password" id="cvv" name="cvv" placeholder="123" required maxlength="3">
+            <div class="form-group">
+                <label for="cvv">Código CVV</label>
+                <input type="password" id="cvv" name="cvv" placeholder="123" required maxlength="3">
+            </div>
 
             <!-- Botón de pago -->
-            <button type="submit" class="pay-button">Pagar ahora</button>
-        </form>
-    </div>
+            <button type="submit" class="btn">Pagar ahora</button>
 
+        </form>
+    </main>
+
+    <!-- Script para actualizar el total -->
     <script>
         // Recuperar el total almacenado en localStorage
         const totalCompra = localStorage.getItem("totalCompra");
@@ -139,5 +81,7 @@
             document.getElementById("total-a-pagar").textContent = "Total a pagar: $0.00";
         }
     </script>
+
 </body>
+
 </html>

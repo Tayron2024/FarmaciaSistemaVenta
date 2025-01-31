@@ -1,73 +1,25 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sucursales y Productos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f8f0;
-        }
-        header {
-            background-color: #2e7d32;
-            color: white;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        header h1 {
-            margin: 0;
-        }
-        main {
-            padding: 20px;
-            max-width: 1000px;
-            margin: auto;
-        }
-        .sucursal {
-            background: white;
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .sucursal h2 {
-            margin: 0 0 10px;
-        }
-        .productos {
-            list-style: none;
-            padding: 0;
-        }
-        .productos li {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-        .productos li:last-child {
-            border-bottom: none;
-        }
-        footer {
-            text-align: center;
-            padding: 10px 0;
-            background-color: #2e7d32;
-            color: white;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
+    <title>Gestión de Sucursales</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 <body>
     <header>
-        <h1>Sucursales y Productos</h1>
+        <h1>Gestión de Sucursales</h1>
         <nav>
-            <a href="/farmaceutico/" style="color: white; text-decoration: none;">Regresar</a>
+            <a href="/farmaceutico/">Regresar</a>
         </nav>
     </header>
+
     <main>
         <h2>Acceso a Sucursales</h2>
+        
         <div class="sucursal">
             <h2>Sucursal Norte</h2>
             <ul class="productos">
@@ -75,7 +27,24 @@
                 <li>Loratadina - 60 unidades en stock</li>
                 <li>Alcohol - 25 unidades en stock</li>
             </ul>
+            <form method="POST" action="{% url 'transferir_producto' %}">
+                {% csrf_token %}
+                <label for="producto">Seleccionar producto:</label>
+                <select name="producto">
+                    <option value="paracetamol">Paracetamol</option>
+                    <option value="loratadina">Loratadina</option>
+                    <option value="alcohol">Alcohol</option>
+                </select>
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" name="cantidad" min="1" required>
+                <label for="destino">Sucursal destino:</label>
+                <select name="destino">
+                    <option value="centro">Sucursal Centro</option>
+                </select>
+                <button type="submit">Transferir</button>
+            </form>
         </div>
+        
         <div class="sucursal">
             <h2>Sucursal Centro</h2>
             <ul class="productos">
@@ -83,8 +52,25 @@
                 <li>Loratadina - 20 unidades en stock</li>
                 <li>Aspirinas - 30 unidades en stock</li>
             </ul>
+            <form method="POST" action="{% url 'transferir_producto' %}">
+                {% csrf_token %}
+                <label for="producto">Seleccionar producto:</label>
+                <select name="producto">
+                    <option value="ibuprofeno">Ibuprofeno</option>
+                    <option value="loratadina">Loratadina</option>
+                    <option value="aspirinas">Aspirinas</option>
+                </select>
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" name="cantidad" min="1" required>
+                <label for="destino">Sucursal destino:</label>
+                <select name="destino">
+                    <option value="norte">Sucursal Norte</option>
+                </select>
+                <button type="submit">Transferir</button>
+            </form>
         </div>
     </main>
+
     <footer>
         <p>&copy; 2025 Farmacia SanaSana. Todos los derechos reservados.</p>
     </footer>

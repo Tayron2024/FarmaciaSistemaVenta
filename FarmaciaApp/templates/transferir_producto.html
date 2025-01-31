@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transferencia de Productos</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Transferencia de Productos</h1>
+        <nav>
+            <a href="{% url 'gestion_sucursal' %}">Regresar</a>
+        </nav>
+    </header>
+
+    <main>
+        <form method="post">
+            {% csrf_token %}
+            <label for="sucursal_origen">Sucursal de Origen:</label>
+            <select name="sucursal_origen" required>
+                <option value="norte">Sucursal Norte</option>
+                <option value="centro">Sucursal Centro</option>
+            </select>
+
+            <label for="sucursal_destino">Sucursal de Destino:</label>
+            <select name="sucursal_destino" required>
+                <option value="norte">Sucursal Norte</option>
+                <option value="centro">Sucursal Centro</option>
+            </select>
+
+            <label for="producto">Producto:</label>
+            <select name="producto" required>
+                <option value="paracetamol">Paracetamol</option>
+                <option value="loratadina">Loratadina</option>
+                <option value="ibuprofeno">Ibuprofeno</option>
+            </select>
+
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" name="cantidad" min="1" required>
+
+            <button type="submit">Confirmar Transferencia</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Farmacia SanaSana. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

@@ -1,160 +1,12 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Interface</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f7f7f7;
-        }
-
-        header {
-            background-color: #4CAF50; /* Color verde */
-            color: white;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        header nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            font-size: 16px;
-        }
-
-        .container {
-            padding: 20px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Aumentado tamaño de las tarjetas */
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 25px; /* Aumentado el tamaño de la tarjeta */
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        .card h2 {
-            margin: 10px 0 5px;
-            font-size: 20px;
-            color: #4CAF50; /* Color verde */
-        }
-
-        .card p {
-            margin: 0 0 10px;
-            color: #666;
-            font-size: 14px;
-        }
-
-        .card .stock {
-            margin: 5px 0;
-            font-size: 14px;
-            color: #777;
-        }
-
-        .card input[type="number"] {
-            width: 80px;
-            padding: 5px;
-            margin: 10px 0;
-        }
-
-        .card button {
-            background-color: #4CAF50; /* Color verde */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .card button:hover {
-            background-color: #45a049; /* Un verde más oscuro */
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px 0;
-            background-color: #4CAF50; /* Color verde */
-            color: white;
-            margin-top: 20px;
-        }
-
-        .cart {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
-        }
-
-        .cart h3 {
-            margin: 0 0 10px;
-            color: #333;
-        }
-
-        .cart ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .cart ul li {
-            margin: 10px 0;
-            color: #666;
-        }
-
-        .cart .total {
-            font-weight: bold;
-            margin-top: 10px;
-            font-size: 16px;
-            color: #333;
-        }
-
-        .cart button {
-            background-color: #4CAF50; /* Color verde */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .cart button:hover {
-            background-color: #45a049; /* Un verde más oscuro */
-        }
-    </style>
+    <title>Interfaz de Cliente</title>
 </head>
 <body>
     <header>
@@ -168,8 +20,8 @@
         <h2>Explora los diversos medicamentos</h2>
         <p>Explore nuestra selección de medicamentos a continuación:</p>
 
-        <!-- Productos -->
         <div class="grid">
+            <!-- Producto 1: Ibuprofeno -->
             <div class="card">
                 <img src="https://www.lasanteca.com/userfiles/2018/12/IBUPROFENO-600MG-CAJA-POR-50-TABLETAS-CON-BLISTER.jpg" alt="Ibuprofeno">
                 <h2>Ibuprofeno</h2>
@@ -179,6 +31,7 @@
                 <button onclick="agregarAlCarrito('Ibuprofeno', 2.50 , 'cantidad-ibuprofeno')">Añadir al Carrito</button>
             </div>
 
+            <!-- Producto 2: Paracetamol -->
             <div class="card">
                 <img src="https://boticasperu.pe/media/catalog/product/cache/eebfcecb9382e8d5ccf71e8b2c8cbd30/9/3/9342026280.jpg" alt="Paracetamol">
                 <h2>Paracetamol</h2>
@@ -188,40 +41,44 @@
                 <button onclick="agregarAlCarrito('Paracetamol', 2.50, 'cantidad-paracetamol')">Añadir al Carrito</button>
             </div>
 
+            <!-- Producto 3: Amoxicilina -->
+            <div class="card">
+                <img src="https://www.lasanteca.com/userfiles/2018/12/AMOXICILINA-250MG-5ML-SUSPENCI%E2%80%A1N-100ML-CON-FRASCO.jpg" alt="Amoxicilina">
+                <h2>Amoxicilina</h2>
+                <p>Antibiótico utilizado para tratar infecciones.</p>
+                <p class="stock">Stock disponible: 100 unidades</p>
+                <input type="number" min="1" value="1" id="cantidad-amoxicilina">
+                <button onclick="agregarAlCarrito('Amoxicilina', 5.00, 'cantidad-amoxicilina')">Añadir al Carrito</button>
+            </div>
+
+            <!-- Producto 4: Naproxeno -->
+            <div class="card">
+                <img src="https://mispastillas.com/wp-content/uploads/2021/05/1201-Naproxeno-500-mg-x-10-tab-GENFAR-mispastillas-tienda-pastillas-medellin-colombia.jpg" alt="Naproxeno">
+                <h2>Naproxeno</h2>
+                <p>Alivio del dolor muscular y articular.</p>
+                <p class="stock">Stock disponible: 180 unidades</p>
+                <input type="number" min="1" value="1" id="cantidad-naproxeno">
+                <button onclick="agregarAlCarrito('Naproxeno', 4.00, 'cantidad-naproxeno')">Añadir al Carrito</button>
+            </div>
+
+            <!-- Producto 5: Loratadina -->
             <div class="card">
                 <img src="https://www.lasanteca.com/userfiles/2018/12/LORATADINA-10MG-CAJA-POR-10-TABLETAS-CON-BLISTER.jpg" alt="Loratadina">
                 <h2>Loratadina</h2>
-                <p>Control de alergias.</p>
-                <p class="stock">Stock disponible: 180 unidades</p>
-                <input type="number" min="1" value="1" id="cantidad-Loratadina">
-                <button onclick="agregarAlCarrito('Loratadina', 2.50, 'cantidad-Loratadina')">Añadir al Carrito</button>
+                <p>Antihistamínico para el alivio de alergias.</p>
+                <p class="stock">Stock disponible: 250 unidades</p>
+                <input type="number" min="1" value="1" id="cantidad-loratadina">
+                <button onclick="agregarAlCarrito('Loratadina', 3.00, 'cantidad-loratadina')">Añadir al Carrito</button>
             </div>
 
+            <!-- Producto 6: Omeprazol -->
             <div class="card">
-                <img src="https://lacasadelesparadrapo-ec.com/wp-content/uploads/2021/07/ALCOHOL-ANTISEPTICO-69.9-250ML-06.jpg" alt="Alcohol">
-                <h2>Alcohol</h2>
-                <p>Líquido que se utiliza como antiséptico y desinfectante.</p>
-                <p class="stock">Stock disponible: 100 unidades</p>
-                <input type="number" min="1" value="1" id="cantidad-Alcohol">
-                <button onclick="agregarAlCarrito('Alcohol', 3.00 , 'cantidad-Alcohol')">Añadir al Carrito</button>
-            </div>
-
-            <div class="card">
-                <img src="https://s1.elespanol.com/2018/06/08/ciencia/salud/farmacologia-farmacologia_clinica-salud_313481328_81018057_1706x1280.jpg" alt="Aspirinas">
-                <h2>Aspirina</h2>
-                <p>Alivia el dolor, la fiebre y la inflamación.</p>
-                <p class="stock">Stock disponible: 130 unidades</p>
-                <input type="number" min="1" value="1" id="cantidad-Aspirina">
-                <button onclick="agregarAlCarrito('Aspirina', 3.00 , 'cantidad-Aspirina')">Añadir al Carrito</button>
-            </div>
-
-            <div class="card">
-                <img src="https://www.eltrebolverde.com.ec/wp-content/uploads/2023/09/63XL.jpg" alt="Complejo B">
-                <h2>Complejo B</h2>
-                <p>Estas vitaminas ayudan al proceso que hace su cuerpo para obtener energía de la comida que usted consume. También ayudan a formar glóbulos rojos.</p>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_ncpDSgVh_ysSIiRYOl2TmrgyDDumEi54-g&s" alt="Omeprazol">
+                <h2>Omeprazol</h2>
+                <p>Medicamento para el tratamiento de problemas estomacales.</p>
                 <p class="stock">Stock disponible: 120 unidades</p>
-                <input type="number" min="1" value="1" id="cantidad-Complejo B">
-                <button onclick="agregarAlCarrito('Complejo B', 3.00 , 'cantidad-Complejo B')">Añadir al Carrito</button>
+                <input type="number" min="1" value="1" id="cantidad-omeprazol">
+                <button onclick="agregarAlCarrito('Omeprazol', 6.00, 'cantidad-omeprazol')">Añadir al Carrito</button>
             </div>
         </div>
 
@@ -234,7 +91,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 Pharmacy. All rights reserved.</p>
+        <p>&copy; 2025 Pharmacy. Todos los derechos reservados.</p>
     </footer>
 
     <script>
@@ -255,7 +112,7 @@
         function actualizarCarrito() {
             const listaCarrito = document.getElementById("lista-carrito");
             const totalCarrito = document.getElementById("total-carrito");
-            listaCarrito.innerHTML = ""; // Limpiar contenido previo
+            listaCarrito.innerHTML = "";
 
             let total = 0;
             carrito.forEach(item => {
