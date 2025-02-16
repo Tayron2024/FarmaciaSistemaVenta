@@ -1,16 +1,109 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/base.css' %}">
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interfaz de Farmacéutico - Farmacias SanaSana</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url("https://previews.123rf.com/images/wararat2599/wararat25992311/wararat2599231103693/218781620-un-concepto-de-farmac%C3%A9utico-y-medicina-de-farmacia-fondo-borroso.jpg") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        header {
+            width: 100%;
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+        }
+
+        .welcome-section h2 {
+            color: #007BFF;
+            margin-bottom: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #218838;
+        }
+
+        .btn-description {
+            font-size: 14px;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        footer {
+            width: 100%;
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Farmacias SanaSana</h1>
+        Farmacias SanaSana
         <nav>
             <a href="/home/">Cerrar Sesión</a>
         </nav>
@@ -22,16 +115,29 @@
             <p>Administra todas las tareas diarias de forma eficiente.</p>
         </div>
 
+        <button class="btn" onclick="window.location.href='{% url 'transferir_medicamento' %}'">
+            Transferir Medicamento
+        </button>
+        <p class="btn-description">Mueve medicamentos entre sucursales fácilmente.</p>
+
         <div class="button-container">
-            <button onclick="window.location.href='/inventario/'">Inventario</button>
-            <button onclick="window.location.href='/pedido/'">Pedidos</button>
-            <button onclick="window.location.href='/sucursal/'">Sucursales</button>
-            <button onclick="window.location.href='/reporte/'">Reportes</button>
+            <div>
+                <button class="btn" onclick="window.location.href='/inventario/'">Inventario</button>
+                <p class="btn-description">Consulta y actualiza el stock de medicamentos.</p>
+            </div>
+            <div>
+                <button class="btn" onclick="window.location.href='/pedido/'">Pedidos</button>
+                <p class="btn-description">Realiza pedidos de medicamentos a proveedores.</p>
+            </div>
+            <div>
+                <button class="btn" onclick="window.location.href='/sucursal/'">Sucursales</button>
+                <p class="btn-description">Gestiona la información de las sucursales.</p>
+            </div>
+            <div>
+                <button class="btn" onclick="window.location.href='/reporte/'">Reportes</button>
+                <p class="btn-description">Genera reportes sobre ventas y stock.</p>
+            </div>
         </div>
     </div>
-
-    <footer>
-        <p>&copy; 2025 Farmacias SanaSana. Todos los derechos reservados.</p>
-    </footer>
 </body>
 </html>

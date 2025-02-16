@@ -3,23 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Inventario</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>Gestión de Inventario - Farmacia SanaSana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url("https://previews.123rf.com/images/wararat2599/wararat25992311/wararat2599231103693/218781620-un-concepto-de-farmac%C3%A9utico-y-medicina-de-farmacia-fondo-borroso.jpg") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        header {
+            width: 100%;
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 90%;
+        }
+
+        h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background: #007BFF;
+            color: white;
+        }
+
+        td input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        footer {
+            width: 100%;
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Gestión de Inventario - Farmacia SanaSana</h1>
+        Gestión de Inventario - Farmacia SanaSana
         <nav>
-            <a href="/farmaceutico/">Regresar</a>
+            <a href="#" onclick="resetInventario()">Reiniciar Inventario</a>
         </nav>
     </header>
 
     <main class="container">
         <h2>Inventario</h2>
-        <button class="btn">Añadir nuevo ítem</button>
+        <button class="btn" onclick="agregarProducto()">Añadir nuevo ítem</button>
 
-        <table>
+        <table id="tabla-inventario">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -29,42 +131,98 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Ibuprofeno</td>
-                    <td>100</td>
-                    <td>$2.50</td>
-                    <td><button class="btn">Editar</button> <button class="btn">Eliminar</button></td>
-                </tr>
-                <tr>
-                    <td>Loratadina</td>
-                    <td>50</td>
-                    <td>$2.50</td>
-                    <td><button class="btn">Editar</button> <button class="btn">Eliminar</button></td>
-                </tr>
-                <tr>
-                    <td>Alcohol</td>
-                    <td>60</td>
-                    <td>$3.00</td>
-                    <td><button class="btn">Editar</button> <button class="btn">Eliminar</button></td>
-                </tr>
-                <tr>
-                    <td>Aspirina</td>
-                    <td>30</td>
-                    <td>$3.00</td>
-                    <td><button class="btn">Editar</button> <button class="btn">Eliminar</button></td>
-                </tr>
-                <tr>
-                    <td>Complejo B</td>
-                    <td>60</td>
-                    <td>$3.00</td>
-                    <td><button class="btn">Editar</button> <button class="btn">Eliminar</button></td>
-                </tr>
+                <!-- Los datos se cargarán dinámicamente desde localStorage -->
             </tbody>
         </table>
     </main>
 
-    <footer>
-        <p>&copy; 2025 Farmacia SanaSana. Todos los derechos reservados.</p>
-    </footer>
+    <script>
+        // Inicializar datos en localStorage si no existen
+        const datosFarmacia = JSON.parse(localStorage.getItem("datosFarmacia")) || {
+            productos: [
+                { nombre: "Ibuprofeno", cantidad: 150, precio: 2.50 },
+                { nombre: "Paracetamol", cantidad: 200, precio: 2.50 },
+                { nombre: "Amoxicilina", cantidad: 100, precio: 5.00 },
+                { nombre: "Naproxeno", cantidad: 180, precio: 4.00 },
+                { nombre: "Loratadina", cantidad: 250, precio: 3.00 },
+                { nombre: "Omeprazol", cantidad: 120, precio: 6.00 },
+            ],
+        };
+
+        if (!localStorage.getItem("datosFarmacia")) {
+            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+        }
+
+        // Llenar la tabla de inventario
+        const tablaInventario = document.getElementById("tabla-inventario").getElementsByTagName("tbody")[0];
+
+        function actualizarTablaInventario() {
+            tablaInventario.innerHTML = ""; // Limpiar la tabla
+            datosFarmacia.productos.forEach((producto, index) => {
+                const row = tablaInventario.insertRow();
+                row.innerHTML = `
+                    <td><input type="text" value="${producto.nombre}" onchange="actualizarNombre(${index}, this.value)"></td>
+                    <td><input type="number" value="${producto.cantidad}" onchange="actualizarCantidad(${index}, this.value)"></td>
+                    <td><input type="number" value="${producto.precio}" onchange="actualizarPrecio(${index}, this.value)"></td>
+                    <td>
+                        <button class="action-btn" onclick="eliminarProducto(${index})">Eliminar</button>
+                    </td>
+                `;
+            });
+        }
+
+        // Función para actualizar el nombre de un producto
+        function actualizarNombre(index, nombre) {
+            datosFarmacia.productos[index].nombre = nombre;
+            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+        }
+
+        // Función para actualizar la cantidad de un producto
+        function actualizarCantidad(index, cantidad) {
+            datosFarmacia.productos[index].cantidad = parseInt(cantidad);
+            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+        }
+
+        // Función para actualizar el precio de un producto
+        function actualizarPrecio(index, precio) {
+            datosFarmacia.productos[index].precio = parseFloat(precio);
+            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+        }
+
+        // Función para eliminar un producto
+        function eliminarProducto(index) {
+            if (confirm("¿Estás seguro de eliminar este producto?")) {
+                datosFarmacia.productos.splice(index, 1);
+                localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+                actualizarTablaInventario();
+            }
+        }
+
+        // Función para agregar un nuevo producto
+        function agregarProducto() {
+            const nombre = prompt("Nombre del producto:");
+            const cantidad = parseInt(prompt("Cantidad:"));
+            const precio = parseFloat(prompt("Precio:"));
+
+            if (nombre && !isNaN(cantidad) && !isNaN(precio)) {
+                datosFarmacia.productos.push({ nombre, cantidad, precio });
+                localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+                actualizarTablaInventario();
+            } else {
+                alert("Datos inválidos. Inténtalo de nuevo.");
+            }
+        }
+
+        // Función para reiniciar el inventario
+        function resetInventario() {
+            if (confirm("¿Estás seguro de reiniciar el inventario? Se perderán todos los datos.")) {
+                localStorage.removeItem("datosFarmacia");
+                location.reload(); // Recargar la página para cargar los datos iniciales
+            }
+        }
+
+        // Cargar la tabla al iniciar la página
+        actualizarTablaInventario();
+    </script>
 </body>
 </html>

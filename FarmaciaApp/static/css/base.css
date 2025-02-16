@@ -1,4 +1,4 @@
-/* Estilos generales */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -10,7 +10,7 @@ body {
     height: 100vh; /* Asegura que el contenido esté centrado verticalmente */
 }
 
-/* Contenedor principal para centrar todo */
+
 main {
     width: 90%; /* Ajusta el ancho para evitar que quede demasiado pegado */
     max-width: 960px; /* Tamaño máximo para que no sea excesivamente grande */
@@ -20,9 +20,9 @@ main {
     text-align: center; /* Asegura que el contenido dentro se vea centrado */
 }
 
-/* Encabezado */
+
 header {
-    background-color: #28a745; /* Barra verde */
+    background-color: #28a745;
     color: white;
     padding: 15px;
     display: flex;
@@ -44,7 +44,7 @@ header h1 {
     padding-left: 20px;
 }
 
-/* Botón de cerrar sesión */
+
 .cerrar-sesion {
     margin-right: 30px; /* Ajuste para separarlo un poco del borde */
     font-size: 16px;
@@ -54,7 +54,7 @@ header h1 {
     transform: translateY(-50%);
 }
 
-/* Contenedor de la interfaz */
+
 .container {
     background: white;
     padding: 30px;
@@ -66,9 +66,9 @@ header h1 {
     margin-top: 80px; /* Ajuste para que el contenido no quede debajo del header fijo */
 }
 
-/* Bienvenida */
+
 .welcome-section {
-    margin-bottom: 40px; /* Espacio entre la bienvenida y los botones */
+    margin-bottom: 40px;
 }
 
 .welcome-section h2 {
@@ -82,7 +82,7 @@ header h1 {
     font-size: 16px;
 }
 
-/* Botones */
+
 button, .btn {
     background-color: #28a745;
     color: white;
@@ -99,7 +99,7 @@ button:hover, .btn:hover {
     background-color: #218838;
 }
 
-/* Botones de navegación */
+
 .button-container {
     display: flex;
     justify-content: center;
@@ -108,7 +108,7 @@ button:hover, .btn:hover {
     margin-top: 20px;
 }
 
-/* Formularios */
+
 .form-group {
     margin-bottom: 15px;
 }
@@ -127,7 +127,7 @@ button:hover, .btn:hover {
     border: 1px solid #ccc;
 }
 
-/* Listados */
+
 .item-list {
     margin-top: 20px;
 }
@@ -187,7 +187,6 @@ footer {
     object-fit: contain; /* Asegura que la imagen no se distorsione */
 }
 
-/* Estilos de la tarjeta para una mejor presentación */
 .card {
     background-color: #fff;
     padding: 20px;
@@ -195,12 +194,12 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease;
-    max-width: 200px; /* Limita el ancho de la tarjeta */
+    max-width: 200px;
     margin: 20px;
 }
 
 .card:hover {
-    transform: translateY(-5px); /* Efecto al pasar el mouse */
+    transform: translateY(-5px);
 }
 
 .grid {
@@ -211,7 +210,7 @@ footer {
     margin-top: 30px;
 }
 
-/* Estilo para los botones */
+
 button {
     background-color: #28a745;
     color: white;

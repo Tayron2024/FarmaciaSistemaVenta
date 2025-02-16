@@ -1,22 +1,124 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Información de Pago</title>
+    <title>Información de Pago - Farmacia SanaSana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- Carga de archivo CSS -->
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        body {
+            font-family: Arial, sans-serif;
+            background: url("https://previews.123rf.com/images/wararat2599/wararat25992311/wararat2599231103693/218781620-un-concepto-de-farmac%C3%A9utico-y-medicina-de-farmacia-fondo-borroso.jpg") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        header {
+            width: 100%;
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 90%;
+        }
+
+        h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn {
+            background: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background: #218838;
+        }
+
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        footer {
+            width: 100%;
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+        }
+    </style>
 </head>
-
 <body>
+    <header>
+        Información de Pago - Farmacia SanaSana
+        <nav>
+            <a href="/home/">Cerrar Sesión</a>
+        </nav>
+    </header>
 
-    <!-- Contenedor principal de la sección de pago -->
-    <main class="container payment-container">
-        
-        <!-- Título de la sección -->
+    <main class="container">
         <h2>Información de Pago</h2>
 
         <!-- Mensaje de total a pagar -->
@@ -25,12 +127,11 @@
         </div>
 
         <!-- Formulario de pago -->
-        <form action="confirmacion_pago.html" method="POST">
-            
-            <!-- Campo oculto para el total -->
-            <input type="hidden" id="input-total" name="total" value="">
+        <form id="pagoForm" action="{% url 'procesar_pago' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="carrito" id="carrito" value="">
+            <input type="hidden" name="total" id="total" value="{{ totalCompra }}">
 
-            <!-- Información personal -->
             <div class="form-group">
                 <label for="nombre">Nombre completo</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre completo" required>
@@ -41,13 +142,11 @@
                 <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo electrónico" required>
             </div>
 
-            <!-- Dirección de envío -->
             <div class="form-group">
                 <label for="direccion">Dirección de envío</label>
                 <input type="text" id="direccion" name="direccion" placeholder="Ingresa tu dirección de envío" required>
             </div>
 
-            <!-- Información de la tarjeta -->
             <div class="form-group">
                 <label for="tarjeta">Número de tarjeta</label>
                 <input type="text" id="tarjeta" name="tarjeta" placeholder="1234 5678 9012 3456" required maxlength="19">
@@ -65,23 +164,51 @@
 
             <!-- Botón de pago -->
             <button type="submit" class="btn">Pagar ahora</button>
-
         </form>
     </main>
 
-    <!-- Script para actualizar el total -->
-    <script>
-        // Recuperar el total almacenado en localStorage
-        const totalCompra = localStorage.getItem("totalCompra");
+<script>
+    // Obtener datos de localStorage
+    const datosFarmacia = JSON.parse(localStorage.getItem("datosFarmacia"));
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const totalCompra = localStorage.getItem("totalCompra");
 
-        // Actualizar el texto del total en la página
-        if (totalCompra && !isNaN(totalCompra)) {
-            document.getElementById("total-a-pagar").textContent = `Total a pagar: $${parseFloat(totalCompra).toFixed(2)}`;
-        } else {
-            document.getElementById("total-a-pagar").textContent = "Total a pagar: $0.00";
+    // Mostrar el total a pagar
+    if (totalCompra && !isNaN(totalCompra)) {
+        document.getElementById("total-a-pagar").textContent = `Total a pagar: $${parseFloat(totalCompra).toFixed(2)}`;
+    } else {
+        document.getElementById("total-a-pagar").textContent = "Total a pagar: $0.00";
+    }
+
+    // Convertir el carrito a JSON y enviarlo en el formulario
+    document.getElementById("pagoForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+
+        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        
+        // Asegúrate de que cada ítem tenga las claves necesarias
+        const carritoValidado = carrito.map(item => {
+            return {
+                producto: item.producto || "Producto desconocido",
+                cantidad: item.cantidad || 0,
+                precio: item.precio || 0.00,
+                subtotal: item.subtotal || 0.00
+            };
+        });
+
+        // Verificar si el carrito está vacío
+        if (carritoValidado.length === 0) {
+            alert("El carrito está vacío. Agrega productos antes de pagar.");
+            return;
         }
-    </script>
 
+        // Enviar el carrito validado y el total al backend
+        document.getElementById("carrito").value = JSON.stringify(carritoValidado);
+        document.getElementById("total").value = totalCompra || 0.00;
+
+        // Enviar el formulario
+        this.submit();
+    });
+</script>
 </body>
-
 </html>

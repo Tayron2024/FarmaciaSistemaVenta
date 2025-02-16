@@ -2,6 +2,13 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, Permission, Group
 
 
+class Venta(models.Model):
+    nombre = models.CharField(max_length=255)
+    correo = models.EmailField()
+    direccion = models.TextField()
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    fecha = models.DateTimeField(auto_now_add=True)
+
 class Estado(models.TextChoices):
     ABIERTO = "ABIERTO", "Abierto"
     CERRADO = "CERRADO", "Cerrado"
@@ -204,3 +211,33 @@ class Inventario(models.Model):
 
     def revisarBodega(self):
         pass
+
+class Transferencia(models.Model):
+    sucursal_origen = models.ForeignKey(Sucursal, on_delete=models.CASCADE, related_name='transferencias_origen')
+    sucursal_destino = models.ForeignKey(Sucursal, on_delete=models.CASCADE, related_name='transferencias_destino')
+    insumo = models.ForeignKey(Insumo, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField()
+    fecha_transferencia = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Transferencia de {self.insumo.nombre} desde {self.sucursal_origen.nombre} a {self.sucursal_destino.nombre}"
+
+class Venta(models.Model):
+    fecha = models.DateTimeField(auto_now_add=True)
+    nombre_cliente = models.CharField(max_length=100, default='Cliente Anónimo')
+    correo_cliente = models.EmailField(default='cliente@example.com')
+    direccion_cliente = models.CharField(max_length=200, default='Dirección no especificada')
+    total = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+
+    def __str__(self):
+        return f"Venta #{self.id} - {self.nombre_cliente}"
+
+class DetalleVenta(models.Model):
+    venta = models.ForeignKey(Venta, related_name='detalles', on_delete=models.CASCADE)
+    producto = models.CharField(max_length=100)
+    cantidad = models.IntegerField()
+    precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.producto} - {self.cantidad} unidades"

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura - Farmacia SanaSana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url("https://previews.123rf.com/images/wararat2599/wararat25992311/wararat2599231103693/218781620-un-concepto-de-farmac%C3%A9utico-y-medicina-de-farmacia-fondo-borroso.jpg") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header {
+            width: 100%;
+            background: linear-gradient(135deg, #007BFF, #00BFFF);
+            color: white;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 100%;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #007BFF;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        tr:hover {
+            background: #f1f1f1;
+        }
+
+        .total {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: right;
+            color: #007BFF;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .button-group button {
+            background: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+            flex: 1;
+        }
+
+        .button-group button.transferir {
+            background: #007BFF;
+        }
+
+        .button-group button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            width: 100%;
+            background: linear-gradient(135deg, #007BFF, #00BFFF);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .info-cliente {
+            background: #f1f1f1;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-cliente p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Factura de Compra - Farmacia SanaSana
+    </header>
+
+    <main class="container">
+        <h2>Detalles de la Factura</h2>
+
+        <!-- Información del cliente -->
+        <div class="info-cliente">
+            <p><strong>Nombre:</strong> {{ nombre }}</p>
+            <p><strong>Correo:</strong> {{ correo }}</p>
+            <p><strong>Dirección:</strong> {{ direccion }}</p>
+        </div>
+
+        <!-- Tabla de productos comprados -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in carrito %}
+                <tr>
+                    <td>{{ item.producto }}</td>
+                    <td>{{ item.cantidad }}</td>
+                    <td>${{ item.precio }}</td>
+                    <td>${{ item.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Total a pagar -->
+        <div class="total">
+            <p><strong>Total a pagar:</strong> ${{ total }}</p>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="button-group">
+            <button onclick="retirarPedido()">Retirar Pedido Ahora</button>
+            <button class="transferir" onclick="irATransferencia()">Transferencia Sucursal</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Farmacia SanaSana. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Función para retirar el pedido
+        function retirarPedido() {
+            alert("Su pedido está listo para retirar en la Sucursal Norte.");
+            window.location.href = "/gestion_cliente/"; // Redirigir a la página de gestión de cliente
+        }
+
+        // Función para ir a la página de transferencia de medicamentos
+        function irATransferencia() {
+            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+            if (carrito.length > 0) {
+                // Convertir el carrito a un formato que pueda pasarse por URL
+                const productosTransferir = carrito.map(item => ({
+                    producto: item.producto,
+                    cantidad: item.cantidad,
+                    precio: item.precio
+                }));
+
+                // Redirigir a la página de transferencia con los datos del carrito
+                window.location.href = `/transferir?carrito=${encodeURIComponent(JSON.stringify(productosTransferir))}`;
+            } else {
+                alert("No hay productos en el carrito para transferir.");
+            }
+        }
+
+        // Función para calcular el subtotal y el total
+        function calcularTotales() {
+            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            let total = 0;
+
+            carrito.forEach((item) => {
+                const cantidad = parseFloat(item.cantidad);
+                const precio = parseFloat(item.precio);
+                item.subtotal = (cantidad * precio).toFixed(2); // Calcular subtotal
+                total += parseFloat(item.subtotal); // Sumar al total
+            });
+
+            // Actualizar el total en la interfaz
+            document.querySelector(".total p strong").textContent = `Total a pagar: $${total.toFixed(2)}`;
+        }
+
+        // Calcular los totales al cargar la página
+        calcularTotales();
+    </script>
+</body>
+</html>

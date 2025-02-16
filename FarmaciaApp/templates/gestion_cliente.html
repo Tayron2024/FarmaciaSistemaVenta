@@ -1,22 +1,232 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/base.css' %}">
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interfaz de Cliente</title>
+    <title>Interfaz de Cliente - Farmacia SanaSana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url("https://previews.123rf.com/images/wararat2599/wararat25992311/wararat2599231103693/218781620-un-concepto-de-farmac%C3%A9utico-y-medicina-de-farmacia-fondo-borroso.jpg") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        header {
+            width: 100%;
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            max-width: 1200px;
+            width: 100%;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .card img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .card .stock {
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .card input {
+            width: 80%;
+            padding: 5px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .card button {
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .card button:hover {
+            background: #218838;
+        }
+
+        .cart {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        .cart h3 {
+            color: #007BFF;
+            margin-bottom: 15px;
+        }
+
+        .cart ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cart ul li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart ul li .info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .cart ul li .info .nombre {
+            font-weight: bold;
+        }
+
+        .cart ul li .info .precio-unitario {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .cart ul li .info .subtotal {
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .cart ul li button {
+            background: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: 0.3s;
+        }
+
+        .cart ul li button:hover {
+            background: #c82333;
+        }
+
+        .cart .total {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 15px;
+            text-align: right;
+        }
+
+        .cart .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .cart .button-group button {
+            background: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+            flex: 1;
+        }
+
+        .cart .button-group button:hover {
+            opacity: 0.9;
+        }
+
+        footer {
+            width: 100%;
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Farmacias SanaSana</h1>
+        Farmacia SanaSana
         <nav>
             <a href="/home/">Cerrar Sesión</a>
         </nav>
     </header>
 
-    <div class="container">
+    <main class="container">
         <h2>Explora los diversos medicamentos</h2>
         <p>Explore nuestra selección de medicamentos a continuación:</p>
 
@@ -27,8 +237,9 @@
                 <h2>Ibuprofeno</h2>
                 <p>Alivia el dolor y baja la fiebre.</p>
                 <p class="stock">Stock disponible: 150 unidades</p>
+                <p class="precio">Precio unitario: $2.50</p>
                 <input type="number" min="1" value="1" id="cantidad-ibuprofeno">
-                <button onclick="agregarAlCarrito('Ibuprofeno', 2.50 , 'cantidad-ibuprofeno')">Añadir al Carrito</button>
+                <button onclick="agregarAlCarrito('Ibuprofeno', 2.50, 'cantidad-ibuprofeno')">Añadir al Carrito</button>
             </div>
 
             <!-- Producto 2: Paracetamol -->
@@ -37,6 +248,7 @@
                 <h2>Paracetamol</h2>
                 <p>Control del dolor y fiebre.</p>
                 <p class="stock">Stock disponible: 200 unidades</p>
+                <p class="precio">Precio unitario: $2.50</p>
                 <input type="number" min="1" value="1" id="cantidad-paracetamol">
                 <button onclick="agregarAlCarrito('Paracetamol', 2.50, 'cantidad-paracetamol')">Añadir al Carrito</button>
             </div>
@@ -47,6 +259,7 @@
                 <h2>Amoxicilina</h2>
                 <p>Antibiótico utilizado para tratar infecciones.</p>
                 <p class="stock">Stock disponible: 100 unidades</p>
+                <p class="precio">Precio unitario: $5.00</p>
                 <input type="number" min="1" value="1" id="cantidad-amoxicilina">
                 <button onclick="agregarAlCarrito('Amoxicilina', 5.00, 'cantidad-amoxicilina')">Añadir al Carrito</button>
             </div>
@@ -57,6 +270,7 @@
                 <h2>Naproxeno</h2>
                 <p>Alivio del dolor muscular y articular.</p>
                 <p class="stock">Stock disponible: 180 unidades</p>
+                <p class="precio">Precio unitario: $4.00</p>
                 <input type="number" min="1" value="1" id="cantidad-naproxeno">
                 <button onclick="agregarAlCarrito('Naproxeno', 4.00, 'cantidad-naproxeno')">Añadir al Carrito</button>
             </div>
@@ -67,6 +281,7 @@
                 <h2>Loratadina</h2>
                 <p>Antihistamínico para el alivio de alergias.</p>
                 <p class="stock">Stock disponible: 250 unidades</p>
+                <p class="precio">Precio unitario: $3.00</p>
                 <input type="number" min="1" value="1" id="cantidad-loratadina">
                 <button onclick="agregarAlCarrito('Loratadina', 3.00, 'cantidad-loratadina')">Añadir al Carrito</button>
             </div>
@@ -77,6 +292,7 @@
                 <h2>Omeprazol</h2>
                 <p>Medicamento para el tratamiento de problemas estomacales.</p>
                 <p class="stock">Stock disponible: 120 unidades</p>
+                <p class="precio">Precio unitario: $6.00</p>
                 <input type="number" min="1" value="1" id="cantidad-omeprazol">
                 <button onclick="agregarAlCarrito('Omeprazol', 6.00, 'cantidad-omeprazol')">Añadir al Carrito</button>
             </div>
@@ -86,44 +302,157 @@
             <h3>Carrito de Compras</h3>
             <ul id="lista-carrito"></ul>
             <div class="total" id="total-carrito">Total: $0</div>
-            <button onclick="window.location.href='/compra/'">Ir al Método de Pago</button>
+            <div class="button-group">
+                <button onclick="irAPago()">Ir al Método de Pago</button>
+                <button class="reiniciar" onclick="reiniciarCarrito()">Reiniciar Carrito</button>
+            </div>
         </div>
-    </div>
-
-    <footer>
-        <p>&copy; 2025 Pharmacy. Todos los derechos reservados.</p>
-    </footer>
+    </main>
 
     <script>
-        const carrito = [];
+        // Obtener datos de localStorage
+        const datosFarmacia = JSON.parse(localStorage.getItem("datosFarmacia")) || {
+            productos: [
+                { nombre: "Ibuprofeno", cantidad: 150, precio: 2.50 },
+                { nombre: "Paracetamol", cantidad: 200, precio: 2.50 },
+                { nombre: "Amoxicilina", cantidad: 100, precio: 5.00 },
+                { nombre: "Naproxeno", cantidad: 180, precio: 4.00 },
+                { nombre: "Loratadina", cantidad: 250, precio: 3.00 },
+                { nombre: "Omeprazol", cantidad: 120, precio: 6.00 },
+            ],
+            sucursales: [
+                {
+                    nombre: "Sucursal Norte",
+                    productos: [
+                        { nombre: "Ibuprofeno", cantidad: 150 },
+                        { nombre: "Paracetamol", cantidad: 200 },
+                        { nombre: "Amoxicilina", cantidad: 100 },
+                    ],
+                },
+                {
+                    nombre: "Sucursal Sur",
+                    productos: [
+                        { nombre: "Ibuprofeno", cantidad: 120 },
+                        { nombre: "Paracetamol", cantidad: 180 },
+                        { nombre: "Amoxicilina", cantidad: 90 },
+                    ],
+                },
+                {
+                    nombre: "Sucursal Este",
+                    productos: [
+                        { nombre: "Ibuprofeno", cantidad: 200 },
+                        { nombre: "Paracetamol", cantidad: 220 },
+                        { nombre: "Amoxicilina", cantidad: 110 },
+                    ],
+                },
+            ],
+            ventas: [],
+            transferencias: [],
+        };
 
+        // Inicializar localStorage si no existe
+        if (!localStorage.getItem("datosFarmacia")) {
+            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+        }
+
+        // Obtener el carrito de localStorage
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+        // Función para agregar productos al carrito
         function agregarAlCarrito(producto, precio, inputId) {
             const cantidad = parseInt(document.getElementById(inputId).value);
-            const total = precio * cantidad;
+            const subtotal = precio * cantidad;
 
-            carrito.push({ producto, cantidad, total });
+            // Verificar si el producto ya está en el carrito
+            const productoEnCarrito = carrito.find(item => item.producto === producto);
+            if (productoEnCarrito) {
+                productoEnCarrito.cantidad += cantidad;
+                productoEnCarrito.subtotal += subtotal;
+            } else {
+                carrito.push({ producto, cantidad, precio, subtotal });
+            }
 
-            const totalCompra = carrito.reduce((acc, item) => acc + item.total, 0);
-            localStorage.setItem("totalCompra", totalCompra);
+            // Guardar el carrito en localStorage
+            localStorage.setItem("carrito", JSON.stringify(carrito));
 
+            // Actualizar el carrito en la interfaz
             actualizarCarrito();
         }
 
+        // Función para eliminar un producto del carrito
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1);
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            actualizarCarrito();
+        }
+
+        // Función para reiniciar el carrito
+        function reiniciarCarrito() {
+            if (confirm("¿Estás seguro de que deseas vaciar el carrito?")) {
+                carrito = [];
+                localStorage.setItem("carrito", JSON.stringify(carrito));
+                actualizarCarrito();
+            }
+        }
+
+        // Función para actualizar el carrito en la interfaz
         function actualizarCarrito() {
             const listaCarrito = document.getElementById("lista-carrito");
             const totalCarrito = document.getElementById("total-carrito");
             listaCarrito.innerHTML = "";
 
             let total = 0;
-            carrito.forEach(item => {
-                total += item.total;
+            carrito.forEach((item, index) => {
+                total += item.subtotal;
                 const li = document.createElement("li");
-                li.textContent = `${item.producto} - Cantidad: ${item.cantidad}, Total: $${item.total}`;
+
+                // Información del producto
+                const info = document.createElement("div");
+                info.className = "info";
+                info.innerHTML = `
+                    <div class="nombre">${item.producto}</div>
+                    <div class="precio-unitario">Precio unitario: $${item.precio.toFixed(2)}</div>
+                    <div class="subtotal">Subtotal: $${item.subtotal.toFixed(2)}</div>
+                `;
+                li.appendChild(info);
+
+                // Botón para eliminar el producto del carrito
+                const botonEliminar = document.createElement("button");
+                botonEliminar.textContent = "Eliminar";
+                botonEliminar.onclick = () => eliminarDelCarrito(index);
+                li.appendChild(botonEliminar);
+
                 listaCarrito.appendChild(li);
             });
 
-            totalCarrito.textContent = `Total: $${total}`;
+            totalCarrito.textContent = `Total: $${total.toFixed(2)}`;
         }
+
+        // Función para redirigir a la página de pago
+        function irAPago() {
+            if (carrito.length === 0) {
+                alert("El carrito está vacío. Agrega productos antes de pagar.");
+            } else {
+                // Validar que cada ítem tenga las claves necesarias
+                const carritoValidado = carrito.map(item => {
+                    return {
+                        producto: item.producto || "Producto desconocido",
+                        cantidad: item.cantidad || 0,
+                        precio: item.precio || 0.00,
+                        subtotal: item.subtotal || 0.00
+                    };
+                });
+
+                // Guardar el carrito validado en localStorage
+                localStorage.setItem("carrito", JSON.stringify(carritoValidado));
+
+                // Redirigir a la página de pago
+                window.location.href = "/compra/";
+            }
+        }
+
+        // Actualizar el carrito al cargar la página
+        actualizarCarrito();
     </script>
 </body>
 </html>

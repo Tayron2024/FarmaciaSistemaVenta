@@ -6,17 +6,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos</title>
-    <link rel="stylesheet" href="base.css">
+    <title>Pedidos - Farmacia SanaSana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url("https://previews.123rf.com/images/wararat2599/wararat25992311/wararat2599231103693/218781620-un-concepto-de-farmac%C3%A9utico-y-medicina-de-farmacia-fondo-borroso.jpg") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        header {
+            width: 100%;
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        .pedido-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .pedido {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .pedido h3 {
+            color: #007BFF;
+        }
+
+        footer {
+            width: 100%;
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Pedidos</h1>
+        Pedidos - Farmacia SanaSana
         <nav>
             <a href="/farmaceutico/">Regresar</a>
         </nav>
     </header>
-    <main>
+
+    <main class="container">
         <h2>Lista de Pedidos</h2>
         <form id="pedidoForm">
             <div class="form-group">
@@ -33,20 +149,24 @@
         </form>
         <div class="pedido-list"></div>
     </main>
+
     <footer>
-        <p>&copy; 2025 Pharmacy Management System. All rights reserved.</p>
+        <p>&copy; 2025 Farmacia SanaSana. Todos los derechos reservados.</p>
     </footer>
+
     <script>
         document.getElementById('pedidoForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const pedidoName = document.getElementById('pedidoName').value;
             const pedidoDetails = document.getElementById('pedidoDetails').value;
+
             if (pedidoName && pedidoDetails) {
                 const pedidoList = document.querySelector('.pedido-list');
                 const nuevoPedido = document.createElement('div');
                 nuevoPedido.classList.add('pedido');
                 nuevoPedido.innerHTML = `<h3>${pedidoName}</h3><p>${pedidoDetails}</p>`;
                 pedidoList.appendChild(nuevoPedido);
+
                 document.getElementById('pedidoForm').reset();
             }
         });

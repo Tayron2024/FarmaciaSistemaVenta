@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transferir Medicamentos - Farmacia SanaSana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url("https://previews.123rf.com/images/wararat2599/wararat25992311/wararat2599231103693/218781620-un-concepto-de-farmac%C3%A9utico-y-medicina-de-farmacia-fondo-borroso.jpg") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header {
+            width: 100%;
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 90%;
+            margin-top: 80px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background: #007BFF;
+            color: white;
+        }
+
+        td input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        footer {
+            width: 100%;
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Transferir Medicamentos - Farmacia SanaSana
+        <nav>
+            <a href="/farmaceutico/">Regresar</a>
+            <a href="#" onclick="resetDatos()">Reiniciar Datos</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>Transferencia de Medicamentos</h2>
+
+        <!-- Formulario para transferir medicamentos -->
+        <form id="transferenciaForm">
+            <div class="form-group">
+                <label for="sucursal_origen">Sucursal de Origen:</label>
+                <select name="sucursal_origen" id="sucursal_origen" required>
+                    <!-- Las sucursales se cargarán dinámicamente desde localStorage -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="sucursal_destino">Sucursal de Destino:</label>
+                <select name="sucursal_destino" id="sucursal_destino" required>
+                    <!-- Las sucursales se cargarán dinámicamente desde localStorage -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="producto">Producto:</label>
+                <select name="producto" id="producto" required>
+                    <!-- Los productos se cargarán dinámicamente desde localStorage -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" name="cantidad" id="cantidad" min="1" required>
+            </div>
+
+            <button type="submit">Transferir Medicamento</button>
+        </form>
+
+        <!-- Tabla de inventario por sucursal -->
+        <h2>Inventario por Sucursal</h2>
+        <table id="tabla-inventario">
+            <thead>
+                <tr>
+                    <th>Sucursal</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los datos se cargarán dinámicamente desde localStorage -->
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Farmacia SanaSana. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script>
+        // Obtener datos de localStorage
+        const datosFarmacia = JSON.parse(localStorage.getItem("datosFarmacia")) || {
+            sucursales: [
+                {
+                    nombre: "Sucursal Norte",
+                    productos: [
+                        { nombre: "Ibuprofeno", cantidad: 150 },
+                        { nombre: "Paracetamol", cantidad: 200 },
+                        { nombre: "Amoxicilina", cantidad: 100 },
+                    ],
+                },
+                {
+                    nombre: "Sucursal Sur",
+                    productos: [
+                        { nombre: "Ibuprofeno", cantidad: 120 },
+                        { nombre: "Paracetamol", cantidad: 180 },
+                        { nombre: "Amoxicilina", cantidad: 90 },
+                    ],
+                },
+                {
+                    nombre: "Sucursal Este",
+                    productos: [
+                        { nombre: "Ibuprofeno", cantidad: 200 },
+                        { nombre: "Paracetamol", cantidad: 220 },
+                        { nombre: "Amoxicilina", cantidad: 110 },
+                    ],
+                },
+            ],
+        };
+
+        // Inicializar localStorage si no existe
+        if (!localStorage.getItem("datosFarmacia")) {
+            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+        }
+
+        // Llenar los select de sucursales y productos
+        const selectSucursalOrigen = document.getElementById("sucursal_origen");
+        const selectSucursalDestino = document.getElementById("sucursal_destino");
+        const selectProducto = document.getElementById("producto");
+
+        function cargarSucursalesYProductos() {
+            // Limpiar selects
+            selectSucursalOrigen.innerHTML = "";
+            selectSucursalDestino.innerHTML = "";
+            selectProducto.innerHTML = "";
+
+            // Llenar selects de sucursales
+            datosFarmacia.sucursales.forEach((sucursal) => {
+                const optionOrigen = document.createElement("option");
+                optionOrigen.value = sucursal.nombre;
+                optionOrigen.textContent = sucursal.nombre;
+                selectSucursalOrigen.appendChild(optionOrigen);
+
+                const optionDestino = document.createElement("option");
+                optionDestino.value = sucursal.nombre;
+                optionDestino.textContent = sucursal.nombre;
+                selectSucursalDestino.appendChild(optionDestino);
+            });
+
+            // Llenar select de productos (tomando los productos de la primera sucursal)
+            if (datosFarmacia.sucursales.length > 0) {
+                datosFarmacia.sucursales[0].productos.forEach((producto) => {
+                    const option = document.createElement("option");
+                    option.value = producto.nombre;
+                    option.textContent = producto.nombre;
+                    selectProducto.appendChild(option);
+                });
+            }
+        }
+
+        // Llenar la tabla de inventario
+        const tablaInventario = document.getElementById("tabla-inventario").getElementsByTagName("tbody")[0];
+        function actualizarTablaInventario() {
+            tablaInventario.innerHTML = ""; // Limpiar la tabla
+            datosFarmacia.sucursales.forEach((sucursal) => {
+                sucursal.productos.forEach((producto, index) => {
+                    const row = tablaInventario.insertRow();
+                    row.insertCell().textContent = sucursal.nombre; // Sucursal de origen
+                    row.insertCell().textContent = producto.nombre; // Producto
+
+                    // Hacer la cantidad editable
+                    const cellCantidad = row.insertCell();
+                    const inputCantidad = document.createElement("input");
+                    inputCantidad.type = "number";
+                    inputCantidad.value = producto.cantidad;
+                    inputCantidad.addEventListener("change", () => {
+                        producto.cantidad = parseInt(inputCantidad.value); // Actualizar cantidad
+                        localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia)); // Guardar cambios
+                    });
+                    cellCantidad.appendChild(inputCantidad);
+                });
+            });
+        }
+
+        // Función para transferir medicamentos
+        document.getElementById("transferenciaForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const sucursalOrigen = selectSucursalOrigen.value;
+            const sucursalDestino = selectSucursalDestino.value;
+            const producto = selectProducto.value;
+            const cantidad = parseInt(document.getElementById("cantidad").value);
+
+            // Validar que la cantidad sea válida
+            if (cantidad <= 0) {
+                alert("La cantidad debe ser mayor que 0.");
+                return;
+            }
+
+            // Buscar las sucursales en los datos
+            const sucursalOrigenData = datosFarmacia.sucursales.find((s) => s.nombre === sucursalOrigen);
+            const sucursalDestinoData = datosFarmacia.sucursales.find((s) => s.nombre === sucursalDestino);
+
+            // Buscar el producto en la sucursal de origen
+            const productoOrigen = sucursalOrigenData.productos.find((p) => p.nombre === producto);
+
+            // Validar que haya suficiente stock en la sucursal de origen
+            if (productoOrigen.cantidad < cantidad) {
+                alert("No hay suficiente stock en la sucursal de origen.");
+                return;
+            }
+
+            // Buscar el producto en la sucursal de destino
+            const productoDestino = sucursalDestinoData.productos.find((p) => p.nombre === producto);
+
+            // Realizar la transferencia
+            productoOrigen.cantidad -= cantidad;
+            productoDestino.cantidad += cantidad;
+
+            // Actualizar localStorage
+            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+
+            // Actualizar la tabla de inventario
+            actualizarTablaInventario();
+
+            alert("Transferencia realizada con éxito.");
+        });
+
+        // Función para reiniciar los datos
+        function resetDatos() {
+            if (confirm("¿Estás seguro de reiniciar los datos? Se perderán todos los datos actuales.")) {
+                localStorage.removeItem("datosFarmacia");
+                location.reload(); // Recargar la página para cargar los datos iniciales
+            }
+        }
+
+        // Cargar los datos al iniciar la página
+        cargarSucursalesYProductos();
+        actualizarTablaInventario();
+    </script>
+</body>
+</html>

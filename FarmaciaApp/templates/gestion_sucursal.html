@@ -1,78 +1,218 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/base.css' %}">
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Sucursales</title>
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>Gestión de Sucursales - Farmacia SanaSana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url("https://previews.123rf.com/images/wararat2599/wararat25992311/wararat2599231103693/218781620-un-concepto-de-farmac%C3%A9utico-y-medicina-de-farmacia-fondo-borroso.jpg") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        header {
+            width: 100%;
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 90%;
+        }
+
+        h2 {
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background: #007BFF;
+            color: white;
+        }
+
+        td input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        footer {
+            width: 100%;
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Gestión de Sucursales</h1>
+        Gestión de Sucursales - Farmacia SanaSana
         <nav>
-            <a href="/farmaceutico/">Regresar</a>
+            <a href="/home/">Cerrar Sesión</a>
         </nav>
     </header>
 
-    <main>
-        <h2>Acceso a Sucursales</h2>
-        
-        <div class="sucursal">
-            <h2>Sucursal Norte</h2>
-            <ul class="productos">
-                <li>Paracetamol - 50 unidades en stock</li>
-                <li>Loratadina - 60 unidades en stock</li>
-                <li>Alcohol - 25 unidades en stock</li>
-            </ul>
-            <form method="POST" action="{% url 'transferir_producto' %}">
-                {% csrf_token %}
-                <label for="producto">Seleccionar producto:</label>
-                <select name="producto">
-                    <option value="paracetamol">Paracetamol</option>
-                    <option value="loratadina">Loratadina</option>
-                    <option value="alcohol">Alcohol</option>
-                </select>
-                <label for="cantidad">Cantidad:</label>
-                <input type="number" name="cantidad" min="1" required>
-                <label for="destino">Sucursal destino:</label>
-                <select name="destino">
-                    <option value="centro">Sucursal Centro</option>
-                </select>
-                <button type="submit">Transferir</button>
-            </form>
-        </div>
-        
-        <div class="sucursal">
-            <h2>Sucursal Centro</h2>
-            <ul class="productos">
-                <li>Ibuprofeno - 100 unidades en stock</li>
-                <li>Loratadina - 20 unidades en stock</li>
-                <li>Aspirinas - 30 unidades en stock</li>
-            </ul>
-            <form method="POST" action="{% url 'transferir_producto' %}">
-                {% csrf_token %}
-                <label for="producto">Seleccionar producto:</label>
-                <select name="producto">
-                    <option value="ibuprofeno">Ibuprofeno</option>
-                    <option value="loratadina">Loratadina</option>
-                    <option value="aspirinas">Aspirinas</option>
-                </select>
-                <label for="cantidad">Cantidad:</label>
-                <input type="number" name="cantidad" min="1" required>
-                <label for="destino">Sucursal destino:</label>
-                <select name="destino">
-                    <option value="norte">Sucursal Norte</option>
-                </select>
-                <button type="submit">Transferir</button>
-            </form>
-        </div>
-    </main>
+    <main class="container">
+        <h2>Información de Sucursales</h2>
 
-    <footer>
-        <p>&copy; 2025 Farmacia SanaSana. Todos los derechos reservados.</p>
-    </footer>
+        <!-- Tabla editable de sucursales -->
+        <table id="tabla-sucursales">
+            <thead>
+                <tr>
+                    <th>Sucursal</th>
+                    <th>Horario</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los datos se cargarán dinámicamente desde localStorage -->
+            </tbody>
+        </table>
+
+        <!-- Botón para agregar nueva sucursal -->
+        <button onclick="agregarSucursal()" style="margin-top: 20px;">Agregar Nueva Sucursal</button>
+    </main>
+    
+    <script>
+        // Obtener datos de localStorage
+        const datosFarmacia = JSON.parse(localStorage.getItem("datosFarmacia")) || {
+            sucursales: [
+                {
+                    nombre: "Sucursal Norte",
+                    horario: "Lunes a Viernes: 8:00 AM - 8:00 PM",
+                    direccion: "Calle Falsa 123",
+                    telefono: "555-1234",
+                },
+                {
+                    nombre: "Sucursal Sur",
+                    horario: "Lunes a Sábado: 9:00 AM - 7:00 PM",
+                    direccion: "Avenida Siempre Viva 456",
+                    telefono: "555-5678",
+                },
+                {
+                    nombre: "Sucursal Este",
+                    horario: "Lunes a Domingo: 7:00 AM - 10:00 PM",
+                    direccion: "Boulevard de los Sueños Rotos 789",
+                    telefono: "555-9101",
+                },
+            ],
+        };
+
+        // Inicializar localStorage si no existe
+        if (!localStorage.getItem("datosFarmacia")) {
+            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+        }
+
+        // Llenar la tabla de sucursales
+        const tablaSucursales = document.getElementById("tabla-sucursales").getElementsByTagName("tbody")[0];
+        function actualizarTablaSucursales() {
+            tablaSucursales.innerHTML = ""; // Limpiar la tabla
+            datosFarmacia.sucursales.forEach((sucursal, index) => {
+                const row = tablaSucursales.insertRow();
+                row.innerHTML = `
+                    <td><input type="text" value="${sucursal.nombre}" onchange="actualizarSucursal(${index}, 'nombre', this.value)"></td>
+                    <td><input type="text" value="${sucursal.horario}" onchange="actualizarSucursal(${index}, 'horario', this.value)"></td>
+                    <td><input type="text" value="${sucursal.direccion}" onchange="actualizarSucursal(${index}, 'direccion', this.value)"></td>
+                    <td><input type="text" value="${sucursal.telefono}" onchange="actualizarSucursal(${index}, 'telefono', this.value)"></td>
+                    <td><button onclick="eliminarSucursal(${index})">Eliminar</button></td>
+                `;
+            });
+        }
+        actualizarTablaSucursales();
+                // Función para actualizar una sucursal
+        function actualizarSucursal(index, campo, valor) {
+            datosFarmacia.sucursales[index][campo] = valor;
+            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+        }
+
+        // Función para eliminar una sucursal
+        function eliminarSucursal(index) {
+            if (confirm("¿Estás seguro de eliminar esta sucursal?")) {
+                datosFarmacia.sucursales.splice(index, 1);
+                localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+                actualizarTablaSucursales();
+            }
+        }
+
+        // Función para agregar una nueva sucursal
+        function agregarSucursal() {
+            const nuevaSucursal = {
+                nombre: "Nueva Sucursal",
+                horario: "Horario por definir",
+                direccion: "Dirección por definir",
+                telefono: "Teléfono por definir",
+            };
+            datosFarmacia.sucursales.push(nuevaSucursal);
+            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+            actualizarTablaSucursales();
+        }
+    </script>
 </body>
 </html>
