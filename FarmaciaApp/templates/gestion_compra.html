@@ -123,7 +123,7 @@
 
         <!-- Mensaje de total a pagar -->
         <div class="total" id="total-a-pagar">
-            Total a pagar: $0.00
+            
         </div>
 
         <!-- Formulario de pago -->
@@ -169,7 +169,6 @@
 
 <script>
     // Obtener datos de localStorage
-    const datosFarmacia = JSON.parse(localStorage.getItem("datosFarmacia"));
     const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     const totalCompra = localStorage.getItem("totalCompra");
 
@@ -185,7 +184,7 @@
         event.preventDefault(); // Evitar que el formulario se envíe automáticamente
 
         const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-        
+
         // Asegúrate de que cada ítem tenga las claves necesarias
         const carritoValidado = carrito.map(item => {
             return {

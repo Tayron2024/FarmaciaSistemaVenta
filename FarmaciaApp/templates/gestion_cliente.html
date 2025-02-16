@@ -426,6 +426,8 @@
             });
 
             totalCarrito.textContent = `Total: $${total.toFixed(2)}`;
+            // Guardar el total en localStorage
+            localStorage.setItem("totalCompra", total.toFixed(2));
         }
 
         // Función para redirigir a la página de pago
@@ -442,7 +444,6 @@
                         subtotal: item.subtotal || 0.00
                     };
                 });
-
                 // Guardar el carrito validado en localStorage
                 localStorage.setItem("carrito", JSON.stringify(carritoValidado));
 
@@ -453,6 +454,33 @@
 
         // Actualizar el carrito al cargar la página
         actualizarCarrito();
+        // Función para calcular el total del carrito
+function calcularTotal() {
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    let total = 0;
+
+    carrito.forEach((item) => {
+        const cantidad = parseFloat(item.cantidad);
+        const precio = parseFloat(item.precio);
+        item.subtotal = (cantidad * precio).toFixed(2); // Calcular subtotal
+        total += parseFloat(item.subtotal); // Sumar al total
+    });
+
+    // Guardar el total en localStorage
+    localStorage.setItem("totalCompra", total.toFixed(2));
+
+    return total.toFixed(2);
+}
+
+// Llamar a esta función antes de redirigir al usuario a la página de pago
+function irAPago() {
+    const total = calcularTotal(); // Calcular el total
+    if (total > 0) {
+        window.location.href = "/compra/"; // Redirigir a la página de pago
+    } else {
+        alert("El carrito está vacío. Agrega productos antes de pagar.");
+    }
+}
     </script>
 </body>
 </html>

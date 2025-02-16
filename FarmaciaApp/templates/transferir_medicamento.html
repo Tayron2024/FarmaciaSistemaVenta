@@ -167,19 +167,22 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="producto">Producto:</label>
-                <select name="producto" id="producto" required>
-                    <!-- Los productos se cargarán dinámicamente desde localStorage -->
-                </select>
-            </div>
+            <!-- Tabla de productos del carrito -->
+            <h2>Productos del Carrito</h2>
+            <table id="tabla-carrito">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los productos del carrito se cargarán dinámicamente -->
+                </tbody>
+            </table>
 
-            <div class="form-group">
-                <label for="cantidad">Cantidad:</label>
-                <input type="number" name="cantidad" id="cantidad" min="1" required>
-            </div>
-
-            <button type="submit">Transferir Medicamento</button>
+            <button type="submit">Transferir Medicamentos</button>
         </form>
 
         <!-- Tabla de inventario por sucursal -->
@@ -233,21 +236,22 @@
             ],
         };
 
+        // Obtener el carrito de localStorage
+        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
         // Inicializar localStorage si no existe
         if (!localStorage.getItem("datosFarmacia")) {
             localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
         }
 
-        // Llenar los select de sucursales y productos
+        // Llenar los select de sucursales
         const selectSucursalOrigen = document.getElementById("sucursal_origen");
         const selectSucursalDestino = document.getElementById("sucursal_destino");
-        const selectProducto = document.getElementById("producto");
 
-        function cargarSucursalesYProductos() {
+        function cargarSucursales() {
             // Limpiar selects
             selectSucursalOrigen.innerHTML = "";
             selectSucursalDestino.innerHTML = "";
-            selectProducto.innerHTML = "";
 
             // Llenar selects de sucursales
             datosFarmacia.sucursales.forEach((sucursal) => {
@@ -261,85 +265,96 @@
                 optionDestino.textContent = sucursal.nombre;
                 selectSucursalDestino.appendChild(optionDestino);
             });
-
-            // Llenar select de productos (tomando los productos de la primera sucursal)
-            if (datosFarmacia.sucursales.length > 0) {
-                datosFarmacia.sucursales[0].productos.forEach((producto) => {
-                    const option = document.createElement("option");
-                    option.value = producto.nombre;
-                    option.textContent = producto.nombre;
-                    selectProducto.appendChild(option);
-                });
-            }
         }
+
+        // Llenar la tabla de productos del carrito
+        const tablaCarrito = document.getElementById("tabla-carrito").getElementsByTagName("tbody")[0];
+        function cargarProductosDelCarrito() {
+            tablaCarrito.innerHTML = ""; // Limpiar la tabla
+
+            carrito.forEach((item, index) => {
+                const row = tablaCarrito.insertRow();
+                row.insertCell().textContent = item.producto; // Producto
+                row.insertCell().textContent = item.cantidad; // Cantidad
+
+                // Botón para transferir el producto
+                const cellAccion = row.insertCell();
+                const botonTransferir = document.createElement("button");
+                botonTransferir.textContent = "Transferir";
+                botonTransferir.onclick = () => transferirProducto(index);
+                cellAccion.appendChild(botonTransferir);
+            });
+        }
+
+        // Función para transferir un producto
+        function transferirProducto(index) {
+            const producto = carrito[index].producto;
+            const cantidad = carrito[index].cantidad;
+            const sucursalOrigen = selectSucursalOrigen.value;
+            const sucursalDestino = selectSucursalDestino.value;
+            const sucursalOrigenData = datosFarmacia.sucursales.find((s) => s.nombre === sucursalOrigen);
+            const sucursalDestinoData = datosFarmacia.sucursales.find((s) => s.nombre === sucursalDestino);
+            const productoOrigen = sucursalOrigenData.productos.find((p) => p.nombre === producto);
+
+            if (productoOrigen.cantidad < cantidad) {
+                alert("No hay suficiente stock en la sucursal de origen.");
+                if (confirm("¿Deseas volver a la gestión de clientes?")) {
+                    window.location.href = "/gestion_cliente/";
+                }
+                return;
+            }
+
+            const productoDestino = sucursalDestinoData.productos.find((p) => p.nombre === producto);
+
+            productoOrigen.cantidad -= cantidad;
+            productoDestino.cantidad += cantidad;
+
+            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+            actualizarTablaInventario();
+
+            alert("Transferencia realizada con éxito.");
+            window.location.href = "/gestion_cliente/";
+        }
+
+        document.getElementById('transferenciaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (carrito.length === 0) {
+                alert("No hay productos en el carrito para transferir.");
+                return;
+            }
+            let transferidos = false;
+            carrito.forEach((item, index) => {
+                try {
+                    transferirProducto(index);
+                    transferidos = true;
+                } catch (error) {
+                    console.log(error);
+                }
+            });
+            if (transferidos) {
+                alert("Transferencia completada. Redirigiendo a gestión de clientes.");
+                window.location.href = "/gestion_cliente/";
+            } else {
+                alert("Algunos productos no se transfirieron.");
+                if (confirm("¿Deseas volver a la gestión de clientes?")) {
+                    window.location.href = "/gestion_cliente/";
+                }
+            }
+        });
 
         // Llenar la tabla de inventario
         const tablaInventario = document.getElementById("tabla-inventario").getElementsByTagName("tbody")[0];
         function actualizarTablaInventario() {
             tablaInventario.innerHTML = ""; // Limpiar la tabla
             datosFarmacia.sucursales.forEach((sucursal) => {
-                sucursal.productos.forEach((producto, index) => {
+                sucursal.productos.forEach((producto) => {
                     const row = tablaInventario.insertRow();
-                    row.insertCell().textContent = sucursal.nombre; // Sucursal de origen
+                    row.insertCell().textContent = sucursal.nombre; // Sucursal
                     row.insertCell().textContent = producto.nombre; // Producto
-
-                    // Hacer la cantidad editable
-                    const cellCantidad = row.insertCell();
-                    const inputCantidad = document.createElement("input");
-                    inputCantidad.type = "number";
-                    inputCantidad.value = producto.cantidad;
-                    inputCantidad.addEventListener("change", () => {
-                        producto.cantidad = parseInt(inputCantidad.value); // Actualizar cantidad
-                        localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia)); // Guardar cambios
-                    });
-                    cellCantidad.appendChild(inputCantidad);
+                    row.insertCell().textContent = producto.cantidad; // Cantidad
                 });
             });
         }
-
-        // Función para transferir medicamentos
-        document.getElementById("transferenciaForm").addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            const sucursalOrigen = selectSucursalOrigen.value;
-            const sucursalDestino = selectSucursalDestino.value;
-            const producto = selectProducto.value;
-            const cantidad = parseInt(document.getElementById("cantidad").value);
-
-            // Validar que la cantidad sea válida
-            if (cantidad <= 0) {
-                alert("La cantidad debe ser mayor que 0.");
-                return;
-            }
-
-            // Buscar las sucursales en los datos
-            const sucursalOrigenData = datosFarmacia.sucursales.find((s) => s.nombre === sucursalOrigen);
-            const sucursalDestinoData = datosFarmacia.sucursales.find((s) => s.nombre === sucursalDestino);
-
-            // Buscar el producto en la sucursal de origen
-            const productoOrigen = sucursalOrigenData.productos.find((p) => p.nombre === producto);
-
-            // Validar que haya suficiente stock en la sucursal de origen
-            if (productoOrigen.cantidad < cantidad) {
-                alert("No hay suficiente stock en la sucursal de origen.");
-                return;
-            }
-
-            // Buscar el producto en la sucursal de destino
-            const productoDestino = sucursalDestinoData.productos.find((p) => p.nombre === producto);
-
-            // Realizar la transferencia
-            productoOrigen.cantidad -= cantidad;
-            productoDestino.cantidad += cantidad;
-
-            // Actualizar localStorage
-            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
-
-            // Actualizar la tabla de inventario
-            actualizarTablaInventario();
-
-            alert("Transferencia realizada con éxito.");
-        });
 
         // Función para reiniciar los datos
         function resetDatos() {
@@ -350,7 +365,8 @@
         }
 
         // Cargar los datos al iniciar la página
-        cargarSucursalesYProductos();
+        cargarSucursales();
+        cargarProductosDelCarrito();
         actualizarTablaInventario();
     </script>
 </body>
