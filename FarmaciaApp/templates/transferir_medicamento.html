@@ -184,21 +184,6 @@
 
             <button type="submit">Transferir Medicamentos</button>
         </form>
-
-        <!-- Tabla de inventario por sucursal -->
-        <h2>Inventario por Sucursal</h2>
-        <table id="tabla-inventario">
-            <thead>
-                <tr>
-                    <th>Sucursal</th>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Los datos se cargarán dinámicamente desde localStorage -->
-            </tbody>
-        </table>
     </main>
 
     <footer>
@@ -310,7 +295,6 @@
             productoDestino.cantidad += cantidad;
 
             localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
-            actualizarTablaInventario();
 
             alert("Transferencia realizada con éxito.");
             window.location.href = "/gestion_cliente/";
@@ -342,20 +326,6 @@
             }
         });
 
-        // Llenar la tabla de inventario
-        const tablaInventario = document.getElementById("tabla-inventario").getElementsByTagName("tbody")[0];
-        function actualizarTablaInventario() {
-            tablaInventario.innerHTML = ""; // Limpiar la tabla
-            datosFarmacia.sucursales.forEach((sucursal) => {
-                sucursal.productos.forEach((producto) => {
-                    const row = tablaInventario.insertRow();
-                    row.insertCell().textContent = sucursal.nombre; // Sucursal
-                    row.insertCell().textContent = producto.nombre; // Producto
-                    row.insertCell().textContent = producto.cantidad; // Cantidad
-                });
-            });
-        }
-
         // Función para reiniciar los datos
         function resetDatos() {
             if (confirm("¿Estás seguro de reiniciar los datos? Se perderán todos los datos actuales.")) {
@@ -367,7 +337,6 @@
         // Cargar los datos al iniciar la página
         cargarSucursales();
         cargarProductosDelCarrito();
-        actualizarTablaInventario();
     </script>
 </body>
 </html>
