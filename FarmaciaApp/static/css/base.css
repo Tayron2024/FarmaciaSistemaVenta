@@ -1,228 +1,133 @@
 
-body {
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
-    background-color: white; /* Fondo blanco */
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Centra verticalmente */
-    height: 100vh; /* Asegura que el contenido esté centrado verticalmente */
-}
-
-
-main {
-    width: 90%; /* Ajusta el ancho para evitar que quede demasiado pegado */
-    max-width: 960px; /* Tamaño máximo para que no sea excesivamente grande */
-    padding: 20px;
     box-sizing: border-box;
-    margin-top: 80px; /* Ajuste para equilibrar la separación del encabezado */
-    text-align: center; /* Asegura que el contenido dentro se vea centrado */
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background: url("https://previews.123rf.com/images/wararat2599/wararat25992311/wararat2599231103693/218781620-un-concepto-de-farmac%C3%A9utico-y-medicina-de-farmacia-fondo-borroso.jpg") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+}
 
 header {
-    background-color: #28a745;
+    width: 100%;
+    background: rgba(0, 123, 255, 0.9);
     color: white;
     padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Acomoda elementos a los extremos */
-    position: fixed; /* Fija el header en la parte superior */
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
     z-index: 1000;
-    height: 60px;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 26px;
-    flex-grow: 1;
-    text-align: left;
-    padding-left: 20px;
-}
-
-
-.cerrar-sesion {
-    margin-right: 30px; /* Ajuste para separarlo un poco del borde */
-    font-size: 16px;
+nav {
     position: absolute;
-    right: 20px; /* Alineación al lado derecho */
-    top: 50%;
-    transform: translateY(-50%);
+    top: 20px;
+    right: 20px;
 }
 
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 10px;
+}
 
 .container {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: auto; /* Centra horizontalmente */
-    width: 85%; /* Evita que se pegue a los lados */
-    max-width: 800px; /* Evita que sea demasiado ancho */
-    margin-top: 80px; /* Ajuste para que el contenido no quede debajo del header fijo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    max-width: 1000px;
+    width: 90%;
+    margin-top: 80px; /* Margen superior para evitar solapamiento con el header */
+    margin-bottom: 20px;
 }
 
-
-.welcome-section {
-    margin-bottom: 40px;
+h2 {
+    color: #007BFF;
+    margin-bottom: 20px;
+    font-size: 22px;
 }
 
-.welcome-section h2 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 10px;
+.table-container {
+    margin-bottom: 30px;
 }
 
-.welcome-section p {
-    color: #777;
-    font-size: 16px;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
 
-button, .btn {
-    background-color: #28a745;
+th {
+    background: #007BFF;
     color: white;
-    padding: 12px 18px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: background-color 0.3s;
-    margin: 10px;
-}
-
-button:hover, .btn:hover {
-    background-color: #218838;
-}
-
-
-.button-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap; /* Ajuste para pantallas pequeñas */
-    margin-top: 20px;
-}
-
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
     font-weight: bold;
 }
 
-.form-group input, .form-group textarea, .form-group select {
+td input {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    font-size: 16px;
-    border-radius: 5px;
+    padding: 8px;
     border: 1px solid #ccc;
-}
-
-
-.item-list {
-    margin-top: 20px;
-}
-
-.item {
-    background: white;
-    margin: 10px 0;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-}
-
-.item:hover {
-    transform: scale(1.02);
-}
-
-/* Pie de página */
-footer {
-    text-align: center;
-    padding: 12px 0;
-    background-color: #28a745; /* Barra verde abajo */
-    color: white;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    border-radius: 5px;
     font-size: 14px;
 }
 
-/* Ajustes Responsivos */
-@media (max-width: 768px) {
-    main {
-        padding: 15px;
-    }
-
-    header h1 {
-        font-size: 22px; /* Ajuste de tamaño para pantallas más pequeñas */
-    }
-
-    .container {
-        padding: 20px;
-    }
-
-    button, .btn {
-        padding: 10px 14px; /* Botones más pequeños en dispositivos móviles */
-        font-size: 16px;
-    }
-}
-
-/* Estilos para las imágenes dentro de las tarjetas */
-.card img {
-    width: 100%;  /* Hace que la imagen ocupe el 100% del contenedor */
-    max-width: 150px; /* Limita el tamaño máximo de la imagen */
-    height: auto; /* Mantiene la proporción de la imagen */
-    margin-bottom: 15px; /* Espacio entre la imagen y el texto */
-    object-fit: contain; /* Asegura que la imagen no se distorsione */
-}
-
-.card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease;
-    max-width: 200px;
-    margin: 20px;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 30px;
-}
-
-
 button {
-    background-color: #28a745;
+    background: #28a745;
     color: white;
-    padding: 10px 20px;
+    padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-    transition: background-color 0.3s;
+    font-size: 14px;
+    transition: 0.3s;
 }
 
 button:hover {
-    background-color: #218838;
+    background: #218838;
+}
+
+.action-btn {
+    background: #dc3545;
+    margin-left: 5px;
+}
+
+.action-btn:hover {
+    background: #c82333;
+}
+
+footer {
+    width: 100%;
+    background: rgba(0, 123, 255, 0.9);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
 }

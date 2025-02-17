@@ -19,8 +19,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             text-align: center;
+            padding: 20px;
         }
 
         header {
@@ -31,6 +32,10 @@
             font-size: 24px;
             font-weight: bold;
             text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
         }
 
         nav {
@@ -46,41 +51,56 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-            max-width: 800px;
+            max-width: 1000px;
             width: 90%;
+            margin-top: 80px; /* Margen superior para evitar solapamiento con el header */
+            margin-bottom: 100px; /* Margen inferior para evitar solapamiento con el footer */
+            overflow-y: auto; /* Hacer el contenedor desplazable verticalmente */
+            max-height: 70vh; /* Limitar la altura del contenedor */
         }
 
         h2 {
             color: #007BFF;
             margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .table-container {
+            margin-bottom: 30px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 10px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         th, td {
-            padding: 10px;
-            border: 1px solid #ccc;
+            padding: 12px;
+            border: 1px solid #ddd;
             text-align: left;
         }
 
         th {
             background: #007BFF;
             color: white;
+            font-weight: bold;
         }
 
         td input {
             width: 100%;
-            padding: 5px;
+            padding: 8px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 14px;
         }
 
         button {
@@ -90,7 +110,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
             transition: 0.3s;
         }
 
@@ -98,14 +118,25 @@
             background: #218838;
         }
 
+        .action-btn {
+            background: #dc3545;
+            margin-left: 5px;
+        }
+
+        .action-btn:hover {
+            background: #c82333;
+        }
+
         footer {
             width: 100%;
             background: rgba(0, 123, 255, 0.9);
             color: white;
             padding: 10px;
-            position: absolute;
-            bottom: 0;
             text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -118,23 +149,47 @@
     </header>
 
     <main class="container">
-        <h2>Inventario</h2>
-        <button class="btn" onclick="agregarProducto()">Añadir nuevo ítem</button>
+        <!-- Tabla de inventario general -->
+        <div class="table-container">
+            <h2>Inventario General</h2>
+            <button class="btn" onclick="agregarProducto()">Añadir nuevo ítem</button>
+            <table id="tabla-inventario">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los datos se cargarán dinámicamente desde localStorage -->
+                </tbody>
+            </table>
+        </div>
 
-        <table id="tabla-inventario">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Los datos se cargarán dinámicamente desde localStorage -->
-            </tbody>
-        </table>
+        <!-- Tabla de inventario por sucursal -->
+        <div class="table-container">
+            <h2>Inventario por Sucursal</h2>
+            <table id="tabla-sucursales">
+                <thead>
+                    <tr>
+                        <th>Sucursal</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los datos se cargarán dinámicamente desde localStorage -->
+                </tbody>
+            </table>
+        </div>
     </main>
+
+    <footer>
+        <p>&copy; 2025 Farmacia SanaSana. Todos los derechos reservados.</p>
+    </footer>
 
     <script>
         // Inicializar datos en localStorage si no existen
@@ -147,13 +202,39 @@
                 { nombre: "Loratadina", cantidad: 250, precio: 3.00 },
                 { nombre: "Omeprazol", cantidad: 120, precio: 6.00 },
             ],
+            sucursales: [
+                {
+                    nombre: "Sucursal Norte",
+                    productos: [
+                        { nombre: "Ibuprofeno", cantidad: 50 },
+                        { nombre: "Paracetamol", cantidad: 70 },
+                        { nombre: "Amoxicilina", cantidad: 30 },
+                    ],
+                },
+                {
+                    nombre: "Sucursal Sur",
+                    productos: [
+                        { nombre: "Ibuprofeno", cantidad: 40 },
+                        { nombre: "Paracetamol", cantidad: 60 },
+                        { nombre: "Amoxicilina", cantidad: 20 },
+                    ],
+                },
+                {
+                    nombre: "Sucursal Este",
+                    productos: [
+                        { nombre: "Ibuprofeno", cantidad: 60 },
+                        { nombre: "Paracetamol", cantidad: 80 },
+                        { nombre: "Amoxicilina", cantidad: 40 },
+                    ],
+                },
+            ],
         };
 
         if (!localStorage.getItem("datosFarmacia")) {
             localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
         }
 
-        // Llenar la tabla de inventario
+        // Llenar la tabla de inventario de productos
         const tablaInventario = document.getElementById("tabla-inventario").getElementsByTagName("tbody")[0];
 
         function actualizarTablaInventario() {
@@ -213,6 +294,53 @@
             }
         }
 
+        // Llenar la tabla de inventario de sucursales
+        const tablaSucursales = document.getElementById("tabla-sucursales").getElementsByTagName("tbody")[0];
+
+        function actualizarTablaSucursales() {
+            tablaSucursales.innerHTML = ""; // Limpiar la tabla
+            datosFarmacia.sucursales.forEach((sucursal, sucursalIndex) => {
+                sucursal.productos.forEach((producto, productoIndex) => {
+                    const row = tablaSucursales.insertRow();
+                    row.innerHTML = `
+                        <td><input type="text" value="${sucursal.nombre}" onchange="actualizarNombreSucursal(${sucursalIndex}, this.value)"></td>
+                        <td><input type="text" value="${producto.nombre}" onchange="actualizarNombreProductoSucursal(${sucursalIndex}, ${productoIndex}, this.value)"></td>
+                        <td><input type="number" value="${producto.cantidad}" onchange="actualizarCantidadProductoSucursal(${sucursalIndex}, ${productoIndex}, this.value)"></td>
+                        <td>
+                            <button class="action-btn" onclick="eliminarProductoSucursal(${sucursalIndex}, ${productoIndex})">Eliminar</button>
+                        </td>
+                    `;
+                });
+            });
+        }
+
+        // Función para actualizar el nombre de una sucursal
+        function actualizarNombreSucursal(index, nombre) {
+            datosFarmacia.sucursales[index].nombre = nombre;
+            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+        }
+
+        // Función para actualizar el nombre de un producto en una sucursal
+        function actualizarNombreProductoSucursal(sucursalIndex, productoIndex, nombre) {
+            datosFarmacia.sucursales[sucursalIndex].productos[productoIndex].nombre = nombre;
+            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+        }
+
+        // Función para actualizar la cantidad de un producto en una sucursal
+        function actualizarCantidadProductoSucursal(sucursalIndex, productoIndex, cantidad) {
+            datosFarmacia.sucursales[sucursalIndex].productos[productoIndex].cantidad = parseInt(cantidad);
+            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+        }
+
+        // Función para eliminar un producto de una sucursal
+        function eliminarProductoSucursal(sucursalIndex, productoIndex) {
+            if (confirm("¿Estás seguro de eliminar este producto de la sucursal?")) {
+                datosFarmacia.sucursales[sucursalIndex].productos.splice(productoIndex, 1);
+                localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+                actualizarTablaSucursales();
+            }
+        }
+
         // Función para reiniciar el inventario
         function resetInventario() {
             if (confirm("¿Estás seguro de reiniciar el inventario? Se perderán todos los datos.")) {
@@ -221,8 +349,9 @@
             }
         }
 
-        // Cargar la tabla al iniciar la página
+        // Cargar las tablas al iniciar la página
         actualizarTablaInventario();
+        actualizarTablaSucursales();
     </script>
 </body>
 </html>
