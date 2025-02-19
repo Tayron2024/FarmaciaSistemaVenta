@@ -159,24 +159,7 @@
                         <th>Nombre</th>
                         <th>Cantidad</th>
                         <th>Precio</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Los datos se cargarán dinámicamente desde localStorage -->
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Tabla de inventario por sucursal -->
-        <div class="table-container">
-            <h2>Inventario por Sucursal</h2>
-            <table id="tabla-sucursales">
-                <thead>
-                    <tr>
-                        <th>Sucursal</th>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
+                        <th>Imagen</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -187,64 +170,31 @@
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2025 Farmacia SanaSana. Todos los derechos reservados.</p>
-    </footer>
-
     <script>
-        // Inicializar datos en localStorage si no existen
+        // Cargar datos del inventario desde localStorage
         const datosFarmacia = JSON.parse(localStorage.getItem("datosFarmacia")) || {
             productos: [
-                { nombre: "Ibuprofeno", cantidad: 150, precio: 2.50 },
-                { nombre: "Paracetamol", cantidad: 200, precio: 2.50 },
-                { nombre: "Amoxicilina", cantidad: 100, precio: 5.00 },
-                { nombre: "Naproxeno", cantidad: 180, precio: 4.00 },
-                { nombre: "Loratadina", cantidad: 250, precio: 3.00 },
-                { nombre: "Omeprazol", cantidad: 120, precio: 6.00 },
-            ],
-            sucursales: [
-                {
-                    nombre: "Sucursal Norte",
-                    productos: [
-                        { nombre: "Ibuprofeno", cantidad: 50 },
-                        { nombre: "Paracetamol", cantidad: 70 },
-                        { nombre: "Amoxicilina", cantidad: 30 },
-                    ],
-                },
-                {
-                    nombre: "Sucursal Sur",
-                    productos: [
-                        { nombre: "Ibuprofeno", cantidad: 40 },
-                        { nombre: "Paracetamol", cantidad: 60 },
-                        { nombre: "Amoxicilina", cantidad: 20 },
-                    ],
-                },
-                {
-                    nombre: "Sucursal Este",
-                    productos: [
-                        { nombre: "Ibuprofeno", cantidad: 60 },
-                        { nombre: "Paracetamol", cantidad: 80 },
-                        { nombre: "Amoxicilina", cantidad: 40 },
-                    ],
-                },
+                { nombre: "Ibuprofeno", cantidad: 150, precio: 2.50, imagen: "https://www.lasanteca.com/userfiles/2018/12/IBUPROFENO-600MG-CAJA-POR-50-TABLETAS-CON-BLISTER.jpg" },
+                { nombre: "Paracetamol", cantidad: 200, precio: 2.50, imagen: "https://boticasperu.pe/media/catalog/product/cache/eebfcecb9382e8d5ccf71e8b2c8cbd30/9/3/9342026280.jpg" },
+                { nombre: "Amoxicilina", cantidad: 100, precio: 5.00, imagen: "https://www.lasanteca.com/userfiles/2018/12/AMOXICILINA-250MG-5ML-SUSPENCI%E2%80%A1N-100ML-CON-FRASCO.jpg" },
+                { nombre: "Naproxeno", cantidad: 180, precio: 4.00, imagen: "https://mispastillas.com/wp-content/uploads/2021/05/1201-Naproxeno-500-mg-x-10-tab-GENFAR-mispastillas-tienda-pastillas-medellin-colombia.jpg" },
+                { nombre: "Loratadina", cantidad: 250, precio: 3.00, imagen: "https://www.lasanteca.com/userfiles/2018/12/LORATADINA-10MG-CAJA-POR-10-TABLETAS-CON-BLISTER.jpg" },
+                { nombre: "Omeprazol", cantidad: 120, precio: 6.00, imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_ncpDSgVh_ysSIiRYOl2TmrgyDDumEi54-g&s" },
             ],
         };
 
-        if (!localStorage.getItem("datosFarmacia")) {
-            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
-        }
-
-        // Llenar la tabla de inventario de productos
-        const tablaInventario = document.getElementById("tabla-inventario").getElementsByTagName("tbody")[0];
-
+        // Función para actualizar la tabla de inventario
         function actualizarTablaInventario() {
-            tablaInventario.innerHTML = ""; // Limpiar la tabla
+            const tablaInventario = document.getElementById("tabla-inventario").getElementsByTagName("tbody")[0];
+            tablaInventario.innerHTML = "";
+
             datosFarmacia.productos.forEach((producto, index) => {
                 const row = tablaInventario.insertRow();
                 row.innerHTML = `
                     <td><input type="text" value="${producto.nombre}" onchange="actualizarNombre(${index}, this.value)"></td>
                     <td><input type="number" value="${producto.cantidad}" onchange="actualizarCantidad(${index}, this.value)"></td>
                     <td><input type="number" value="${producto.precio}" onchange="actualizarPrecio(${index}, this.value)"></td>
+                    <td><input type="text" value="${producto.imagen}" onchange="actualizarImagen(${index}, this.value)"></td>
                     <td>
                         <button class="action-btn" onclick="eliminarProducto(${index})">Eliminar</button>
                     </td>
@@ -270,6 +220,12 @@
             localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
         }
 
+        // Función para actualizar la imagen de un producto
+        function actualizarImagen(index, imagen) {
+            datosFarmacia.productos[index].imagen = imagen;
+            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
+        }
+
         // Función para eliminar un producto
         function eliminarProducto(index) {
             if (confirm("¿Estás seguro de eliminar este producto?")) {
@@ -284,60 +240,14 @@
             const nombre = prompt("Nombre del producto:");
             const cantidad = parseInt(prompt("Cantidad:"));
             const precio = parseFloat(prompt("Precio:"));
+            const imagen = prompt("URL de la imagen:");
 
-            if (nombre && !isNaN(cantidad) && !isNaN(precio)) {
-                datosFarmacia.productos.push({ nombre, cantidad, precio });
+            if (nombre && !isNaN(cantidad) && !isNaN(precio) && imagen) {
+                datosFarmacia.productos.push({ nombre, cantidad, precio, imagen });
                 localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
                 actualizarTablaInventario();
             } else {
                 alert("Datos inválidos. Inténtalo de nuevo.");
-            }
-        }
-
-        // Llenar la tabla de inventario de sucursales
-        const tablaSucursales = document.getElementById("tabla-sucursales").getElementsByTagName("tbody")[0];
-
-        function actualizarTablaSucursales() {
-            tablaSucursales.innerHTML = ""; // Limpiar la tabla
-            datosFarmacia.sucursales.forEach((sucursal, sucursalIndex) => {
-                sucursal.productos.forEach((producto, productoIndex) => {
-                    const row = tablaSucursales.insertRow();
-                    row.innerHTML = `
-                        <td><input type="text" value="${sucursal.nombre}" onchange="actualizarNombreSucursal(${sucursalIndex}, this.value)"></td>
-                        <td><input type="text" value="${producto.nombre}" onchange="actualizarNombreProductoSucursal(${sucursalIndex}, ${productoIndex}, this.value)"></td>
-                        <td><input type="number" value="${producto.cantidad}" onchange="actualizarCantidadProductoSucursal(${sucursalIndex}, ${productoIndex}, this.value)"></td>
-                        <td>
-                            <button class="action-btn" onclick="eliminarProductoSucursal(${sucursalIndex}, ${productoIndex})">Eliminar</button>
-                        </td>
-                    `;
-                });
-            });
-        }
-
-        // Función para actualizar el nombre de una sucursal
-        function actualizarNombreSucursal(index, nombre) {
-            datosFarmacia.sucursales[index].nombre = nombre;
-            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
-        }
-
-        // Función para actualizar el nombre de un producto en una sucursal
-        function actualizarNombreProductoSucursal(sucursalIndex, productoIndex, nombre) {
-            datosFarmacia.sucursales[sucursalIndex].productos[productoIndex].nombre = nombre;
-            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
-        }
-
-        // Función para actualizar la cantidad de un producto en una sucursal
-        function actualizarCantidadProductoSucursal(sucursalIndex, productoIndex, cantidad) {
-            datosFarmacia.sucursales[sucursalIndex].productos[productoIndex].cantidad = parseInt(cantidad);
-            localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
-        }
-
-        // Función para eliminar un producto de una sucursal
-        function eliminarProductoSucursal(sucursalIndex, productoIndex) {
-            if (confirm("¿Estás seguro de eliminar este producto de la sucursal?")) {
-                datosFarmacia.sucursales[sucursalIndex].productos.splice(productoIndex, 1);
-                localStorage.setItem("datosFarmacia", JSON.stringify(datosFarmacia));
-                actualizarTablaSucursales();
             }
         }
 
@@ -349,9 +259,8 @@
             }
         }
 
-        // Cargar las tablas al iniciar la página
+        // Cargar la tabla al iniciar la página
         actualizarTablaInventario();
-        actualizarTablaSucursales();
     </script>
 </body>
 </html>

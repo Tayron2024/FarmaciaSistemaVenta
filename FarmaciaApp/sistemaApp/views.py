@@ -208,3 +208,4 @@ def factura(request, venta_id):
 
 def transferir_medicamento(request):
     return render(request, 'transferir_medicamento.html')
+

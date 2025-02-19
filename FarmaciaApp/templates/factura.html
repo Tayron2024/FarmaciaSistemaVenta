@@ -167,7 +167,6 @@
                     <th>Producto</th>
                     <th>Cantidad</th>
                     <th>Precio Unitario</th>
-                    <th>Subtotal</th>
                 </tr>
             </thead>
             <tbody>
@@ -176,7 +175,6 @@
                     <td>{{ item.producto }}</td>
                     <td>{{ item.cantidad }}</td>
                     <td>${{ item.precio }}</td>
-                    <td>${{ item.subtotal }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -224,24 +222,21 @@
             }
         }
 
-        // Función para calcular el subtotal y el total
-        function calcularTotales() {
+        // Función para calcular el total
+        function calcularTotal() {
             const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
             let total = 0;
 
             carrito.forEach((item) => {
                 const cantidad = parseFloat(item.cantidad);
                 const precio = parseFloat(item.precio);
-                item.subtotal = (cantidad * precio).toFixed(2); // Calcular subtotal
-                total += parseFloat(item.subtotal); // Sumar al total
+                total += cantidad * precio; // Sumar al total
             });
 
             // Actualizar el total en la interfaz
             document.querySelector(".total p strong").textContent = `Total a pagar: $${total.toFixed(2)}`;
         }
-
-        // Calcular los totales al cargar la página
-        calcularTotales();
+        
     </script>
 </body>
 </html>

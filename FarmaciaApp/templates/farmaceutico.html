@@ -21,7 +21,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             text-align: center;
         }
 
@@ -33,6 +33,10 @@
             font-size: 24px;
             font-weight: bold;
             text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
         }
 
         nav {
@@ -53,11 +57,14 @@
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
             max-width: 500px;
+            margin-top: 120px; /* Aumenté el margen superior para bajar el contenido */
+            width: 90%;
         }
 
         .welcome-section h2 {
             color: #007BFF;
             margin-bottom: 10px;
+            margin-top: 20px; /* Margen superior adicional para el mensaje de bienvenida */
         }
 
         .button-container {
@@ -78,6 +85,7 @@
             font-size: 16px;
             transition: 0.3s;
             width: 100%;
+            text-align: center;
         }
 
         .btn:hover {
@@ -88,6 +96,7 @@
             font-size: 14px;
             color: #555;
             margin-top: 5px;
+            text-align: center;
         }
 
         footer {
@@ -95,9 +104,10 @@
             background: rgba(0, 123, 255, 0.9);
             color: white;
             padding: 10px;
-            position: absolute;
+            position: fixed;
             bottom: 0;
-            text-align: center;
+            left: 0;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -115,25 +125,31 @@
             <p>Administra todas las tareas diarias de forma eficiente.</p>
         </div>
 
+        <!-- Botón para redirigir a la página de Productos (Gestión de Cliente) -->
+        <button class="btn" onclick="window.location.href='/cliente/'">
+            Productos
+        </button>
+        <p class="btn-description">Consulta y gestiona los productos disponibles.</p>
+
         <button class="btn" onclick="window.location.href='{% url 'transferir_medicamento' %}'">
             Transferir Medicamento
         </button>
         <p class="btn-description">Mueve medicamentos entre sucursales fácilmente.</p>
 
         <div class="button-container">
-            <div>
+            <div class="btn-wrapper">
                 <button class="btn" onclick="window.location.href='/inventario/'">Inventario</button>
                 <p class="btn-description">Consulta y actualiza el stock de medicamentos.</p>
             </div>
-            <div>
+            <div class="btn-wrapper">
                 <button class="btn" onclick="window.location.href='/pedido/'">Pedidos</button>
                 <p class="btn-description">Realiza pedidos de medicamentos a proveedores.</p>
             </div>
-            <div>
+            <div class="btn-wrapper">
                 <button class="btn" onclick="window.location.href='/sucursal/'">Sucursales</button>
                 <p class="btn-description">Gestiona la información de las sucursales.</p>
             </div>
-            <div>
+            <div class="btn-wrapper">
                 <button class="btn" onclick="window.location.href='/reporte/'">Reportes</button>
                 <p class="btn-description">Genera reportes sobre ventas y stock.</p>
             </div>

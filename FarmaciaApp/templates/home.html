@@ -57,6 +57,17 @@
             margin-top: 10px;
             font-size: 14px;
         }
+        
+               .register-link {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .register-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -83,23 +94,52 @@
             <button type="submit" class="login-btn">Ingresar</button>
             <p class="error-message" id="errorMessage"></p>
         </form>
+        <p>¿No tienes una cuenta? <a href="{% url 'registro' %}">Regístrate aquí</a></p>
     </div>
+
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
+
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const role = document.getElementById('role').value;
             const errorMessage = document.getElementById('errorMessage');
-            errorMessage.textContent = '';
-            if (username === 'TayronAdmin' && password === '12345' && role === 'Admin') {
-                window.location.href = '/Admin';
-            } else if (username === 'tayron' && password === 'trabajador' && role === 'pharmacist') {
-                window.location.href = '/farmaceutico';
-            } else if (username === 'douglas' && password === 'cliente' && role === 'assistant') {
-                window.location.href = '/cliente';
+
+            // Validar credenciales manuales (roles predefinidos)
+            if (
+                (username === 'TayronAdmin' && password === '12345' && role === 'Admin') ||
+                (username === 'tayron' && password === 'trabajador' && role === 'pharmacist') ||
+                (username === 'douglas' && password === 'cliente' && role === 'assistant')
+            ) {
+                if (role === 'Admin') {
+                    window.location.href = '/Admin';
+                } else if (role === 'pharmacist') {
+                    window.location.href = '/farmaceutico';
+                } else if (role === 'assistant') {
+                    window.location.href = '/cliente';
+                }
+                return;
+            }
+
+            // Validar credenciales con localStorage
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            const usuario = usuarios.find(user => 
+                user.username === username && 
+                user.password === password && 
+                user.role === role
+            );
+
+            if (usuario) {
+                if (role === 'Admin') {
+                    window.location.href = '/Admin';
+                } else if (role === 'pharmacist') {
+                    window.location.href = '/farmaceutico';
+                } else if (role === 'assistant') {
+                    window.location.href = '/cliente';
+                }
             } else {
-                errorMessage.textContent = 'Credenciales incorrectas o rol no válido';
+                errorMessage.textContent = 'Credenciales incorrectas o rol no válido.';
             }
         });
     </script>
