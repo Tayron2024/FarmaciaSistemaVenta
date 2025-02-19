@@ -115,29 +115,27 @@ El cliente recibe su pedido en la sucursal elegida o lo retira según la opción
 
 ## Fotos de las templates
 
-![image](https://github.com/user-attachments/assets/1a840577-41c2-4081-b1ca-a6b37c961191)
+![image](https://github.com/user-attachments/assets/6a37af2b-2f63-473d-843b-aac13b152a90)
 
-![image](https://github.com/user-attachments/assets/f638bff6-2a60-4922-b19d-f1cf990d3c1c)
+![image](https://github.com/user-attachments/assets/791dd71c-52f0-44d8-bf8d-8b4002f95ea8)
 
-![image](https://github.com/user-attachments/assets/8ba0fe54-4db2-4783-969e-d1e4ee5456e2)
+![image](https://github.com/user-attachments/assets/9361d0fe-e9e7-4d8e-87d9-51073aaa3676)
 
-![image](https://github.com/user-attachments/assets/359be36b-4dbe-48c7-ac13-b45c24069d30)
+![image](https://github.com/user-attachments/assets/0023ce15-eed3-41be-9d69-5e5c70d0fd06)
 
-![image](https://github.com/user-attachments/assets/213f0e8c-8a17-43c2-97f2-5b72c62b136c)
+![image](https://github.com/user-attachments/assets/06a2fbbd-192c-4e67-80e7-1379d5faa1f3)
 
-![image](https://github.com/user-attachments/assets/b469629f-e91a-483d-990e-715fc7b7a529)
+![image](https://github.com/user-attachments/assets/3f207c37-f809-45e1-b0b7-335c39e5c7b2)
 
-![image](https://github.com/user-attachments/assets/9aa81845-6dca-4740-811b-2b2d763360d5)
+![image](https://github.com/user-attachments/assets/a6ae6de0-27fb-40e3-8216-160a7b1b273d)
 
-![image](https://github.com/user-attachments/assets/f8d16a78-3e5a-44bd-a59c-41daefaa3181)
+![image](https://github.com/user-attachments/assets/547449a6-22ae-4d37-974d-72474be3b535)
 
-![image](https://github.com/user-attachments/assets/37a25b5f-01e3-4122-a6b3-92b236e8c7fa)
+![image](https://github.com/user-attachments/assets/4a981d6e-dab2-4786-bee5-6a0b37bc2b36)
 
+![image](https://github.com/user-attachments/assets/695bedf0-9b57-43ae-a85c-bb1e8c276945)
 
+![image](https://github.com/user-attachments/assets/8a6849fd-3d79-43e2-85de-00c169fd91e8)
 
-
-
-
-
-
+![image](https://github.com/user-attachments/assets/8056d037-584b-4fbf-8126-b1c0c322b245)
 
